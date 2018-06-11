@@ -77,7 +77,7 @@ function pause () {
 }
 
 function move (event) {
-    console.log( "current element", event.keyCode)
+    // console.log( "current element", event.keyCode)
     if (event.keyCode == "38") {
         //up button
         moveUp();

@@ -35,11 +35,27 @@ function checkEntityCol (entity) {
     }
 }
 
+//returns 1 if not the num column
 function checkNumCol (entity) {
     if(entity%num == 0) {
         return 0;
     } else {
         return 1;
+    }
+}
+
+//check if the bot is beside the player
+function checkBeside (play, bot) {
+    if(play-bot == 1) {
+        return true;
+    } else if (bot-play == 1) {
+        return true;
+    } else if (bot-play == num) {
+        return true;
+    } else if (play-bot == num) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -54,9 +70,13 @@ function botCheck () {
         //get the bot position
         botPosition = parseInt(getBots[i].parentNode.id);
 
-        if(playPosition > botPosition) {
+        if(checkBeside(playPosition, botPosition)) {
+            //bot is directly beisde the player, damages the player at each interval
+            hp -= 40;
+            console.log('hp', hp);
+        } else if(playPosition > botPosition) {
 
-           if (playPosition < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
+            if (playPosition < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
                 //same row, player is to the right of the bot
                 botMove('add', 1, getBots[i]);
             } else {
@@ -114,4 +134,5 @@ function levelOne () {
     }
     
 }
+
 
