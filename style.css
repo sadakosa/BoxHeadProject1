@@ -53,3 +53,7 @@ body {
 .playerBox {
     background-color: red;
 }
+
+.botBox {
+    background-color: grey;
+}

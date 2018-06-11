@@ -1,18 +1,21 @@
 var container = document.getElementsByClassName('container');
 var name;
-var num;
+var num = 50;
 var player;
+var hp = 100;
+var gun = 20;
 
 //move Up
 function moveUp () {
     var playerBox = player.parentNode;
     var playerId = parseInt(playerBox.id);
-    if(playerId > num) {
+    var newBox = document.getElementById((playerId - num).toString())
+
+    if(playerId > num && newBox.childNodes.length<1) {
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
         //find box above
-        var newBox = document.getElementById((playerId - num).toString())
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
     }
@@ -22,12 +25,12 @@ function moveUp () {
 function moveDown () {
     var playerBox = player.parentNode;
     var playerId = parseInt(playerBox.id);
-    if(playerId <= (num*num)-num) {
+    var newBox = document.getElementById((playerId + num).toString())
+
+    if(playerId <= (num*num)-num && newBox.childNodes.length<1) {
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
-        //find box above
-        var newBox = document.getElementById((playerId + num).toString())
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
     }
@@ -37,12 +40,12 @@ function moveDown () {
 function moveLeft () {
     var playerBox = player.parentNode;
     var playerId = parseInt(playerBox.id);
-    if((playerId-1)%num != 0) {
+    var newBox = document.getElementById((playerId - 1).toString())
+
+    if((playerId-1)%num != 0 && newBox.childNodes.length<1) {
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
-        //find box above
-        var newBox = document.getElementById((playerId - 1).toString())
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
     }
@@ -52,12 +55,12 @@ function moveLeft () {
 function moveRight () {
     var playerBox = player.parentNode;
     var playerId = parseInt(playerBox.id);
-    if(playerId%num != 0) {
+    var newBox = document.getElementById((playerId + 1).toString())
+
+    if(playerId%num != 0 && newBox.childNodes.length<1) {
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
-        //find box above
-        var newBox = document.getElementById((playerId + 1).toString())
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
     }

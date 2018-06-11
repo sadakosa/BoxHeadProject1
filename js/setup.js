@@ -1,6 +1,5 @@
 function setup () {
     nameRecord();
-    num = 50;
 
     bigBox = document.createElement('div');
     bigBox.classList.add('bigBox');
@@ -41,6 +40,8 @@ function setup () {
     playerBox.classList.add('playerBox');
 
     document.addEventListener('keydown', move);
+
+    levelOne();
 }
 
 //record the name
