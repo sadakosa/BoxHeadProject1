@@ -1,0 +1,55 @@
+body {
+    font-family: sans-serif;
+}
+
+.container {
+    position: relative;
+    top: 50px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.bigBox {
+    width: 700px;
+    height: 700px;
+    border: 1px solid black;
+    margin: 0 auto;
+    line-height: 1px;
+}
+
+.smallBox {
+    border: 1px solid black;
+    position: relative;
+    display: inline;
+}
+
+#name {
+    left: 100px;
+    position: absolute;
+    height: 30px;
+    width: 200px;
+    display: block;
+}
+
+.button {
+    text-align: center;
+    position: relative;
+    padding: 10px;
+    /* border: 1px solid darkblue; */
+    background-color: coral;
+    display: block;
+    color: white;
+    width: 100px;
+    height: 20px;
+    left: 150px;
+    top: 30px;
+    /* margin: 0 auto; */
+}
+
+.button:hover {
+    background-color: brown;
+}
+
+.playerBox {
+    background-color: red;
+}
