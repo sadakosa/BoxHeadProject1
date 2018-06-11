@@ -1,8 +1,3 @@
-var container = document.getElementsByClassName('container');
-var name;
-var num;
-var player;
-
 function setup () {
     nameRecord();
     num = 50;
@@ -24,6 +19,7 @@ function setup () {
         bigBox.appendChild(smallBox);
     }
 
+    //deleting everything inside container at the start of the game
     var input = document.getElementById('name');
     var welcome = document.getElementById('welcome');
     var start = document.getElementsByClassName('button');
@@ -37,10 +33,14 @@ function setup () {
     // container[0].appendChild(text);
     container[0].appendChild(bigBox);
 
+
+    //adding player to grid
     player = document.createElement('div');
     var playerBox = document.getElementById(num*num/2);
     playerBox.appendChild(player);
     playerBox.classList.add('playerBox');
+
+    document.addEventListener('keydown', move);
 }
 
 //record the name
