@@ -35,6 +35,14 @@ function checkEntityCol (entity) {
     }
 }
 
+function checkNumCol (entity) {
+    if(entity%num == 0) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
 //check where the player is relative to the bot and call the botMove function with arguments
 function botCheck () {
     console.log('botCheck');
@@ -45,10 +53,10 @@ function botCheck () {
     for(var i=0; i<getBots.length; i++) {
         //get the bot position
         botPosition = parseInt(getBots[i].parentNode.id);
-    
+
         if(playPosition > botPosition) {
 
-           if (playPosition - botPosition < num) {
+           if (playPosition < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
                 //same row, player is to the right of the bot
                 botMove('add', 1, getBots[i]);
             } else {
@@ -67,7 +75,7 @@ function botCheck () {
 
         } else if (playPosition < botPosition) {
 
-            if (botPosition - playPosition < num) {
+            if (botPosition < Math.floor(playPosition/num)+checkNumCol(playPosition)) {
                 //same row, player is to the left of the bot
                 botMove('minus', 1, getBots[i]);
             } else {
@@ -89,17 +97,21 @@ function botCheck () {
 }
 
 
-
+//have to figure out the bug
 function levelOne () {
-    var bot = document.createElement('div');
-    bot.classList.add('bot');
-    var x = (Math.floor(Math.random() * num * num) + 1).toString()
-    var botBox = document.getElementById(x);
-    botBox.appendChild(bot);
-    botBox.classList.add("botBox");
 
-    console.log('heyo');
+    for(var i=0; i<3; i++){
+        var bot = document.createElement('div');
+        bot.classList.add('bot');
+        var x = (Math.floor(Math.random() * num * num) + 1).toString()
+        var botBox = document.getElementById(x);
+        botBox.appendChild(bot);
+        botBox.classList.add("botBox");
 
-    setInterval(botCheck, 500);
+        console.log('heyo');
+
+        setInterval(botCheck, 1000);
+    }
+    
 }
 
