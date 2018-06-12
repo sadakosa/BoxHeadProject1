@@ -39,12 +39,17 @@ function setup () {
     var playerBox = document.getElementById(num*num/2);
     playerBox.appendChild(player);
     playerBox.classList.add('playerBox');
+    //rotating the player image
+    playerBox.style.transform = "rotate(270deg)";
 
+    //listen for keydown strokes
     document.addEventListener('keydown', move);
 
+    //getting zombies
     levelOne();
-    var int = setInterval(function () {checkWinLoss(int)}, 1000);
 
+    //checking for Win Loss Situation
+    var int = setInterval(function () {checkWinLoss(int)}, 1000);
 }
 
 //record the name

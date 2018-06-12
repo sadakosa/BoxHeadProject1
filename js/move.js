@@ -6,6 +6,21 @@ var playerWeapon = 'pistol';
 var direction = 'left';
 var hp = 1000;
 
+function changeImageDir(dir) {
+    var playerBox = player.parentNode;
+    if (dir == 'up') {
+        playerBox.style.transform = "rotate(0deg)";
+    } else if (dir == 'down') {
+        playerBox.style.transform = "rotate(180deg)";
+    } else if (dir == 'left') {
+        playerBox.style.transform = "rotate(270deg)";
+    } else if (dir == 'right') {
+        playerBox.style.transform = "rotate(90deg)";
+    }
+}
+
+
+
 //move Up
 function moveUp () {
     var playerBox = player.parentNode;
@@ -20,6 +35,7 @@ function moveUp () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
+        changeImageDir('up')
         //change direction
         direction = 'up';
     }
@@ -38,6 +54,7 @@ function moveDown () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
+        changeImageDir('down');
         //change direction
         direction = 'down';
     }
@@ -56,6 +73,7 @@ function moveLeft () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
+        changeImageDir('left');
         //change direction
         direction = 'left';
     }
@@ -74,6 +92,7 @@ function moveRight () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
+        changeImageDir('right');
         direction = 'right';
     }
 }

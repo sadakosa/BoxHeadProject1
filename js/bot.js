@@ -128,7 +128,7 @@ function botCheck () {
 
 function levelOne () {
 
-    for(var i=1; i<4; i++){
+    for(var i=1; i<11; i++){
         //creating the div for bot
         var bot = document.createElement('div');
         bot.classList.add('bot');
@@ -144,7 +144,7 @@ function levelOne () {
         console.log('heyo');
     }
 
-    setInterval(botCheck, 1000);
+    setInterval(botCheck, 500);
     console.log(Object.keys(bots));
     console.log(Object.values(bots));
     

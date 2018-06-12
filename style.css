@@ -52,13 +52,18 @@ body {
 }
 
 .playerBox {
-    background-color: red;
+    /* background-color: red; */
+    background-image: url('img/player.png');
+    background-size: contain;
 }
 
 .botBox {
-    background-color: grey;
+    /* background-color: grey; */
+    background-image: url('img/zombies.png');
+    background-size: contain;
 }
 
 .bulletBox {
     background-color: black;
+    background-image:
 }
