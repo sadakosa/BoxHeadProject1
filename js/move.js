@@ -1,9 +1,10 @@
 var container = document.getElementsByClassName('container');
 var name;
-var num = 50;
+var num = 36;
 var player;
-var hp = 100;
-var gun = 20;
+var playerWeapon = 'pistol';
+var direction = 'left';
+var hp = 1000;
 
 //move Up
 function moveUp () {
@@ -18,6 +19,9 @@ function moveUp () {
         //find box above
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
+
+        //change direction
+        direction = 'up';
     }
 }
 
@@ -33,6 +37,9 @@ function moveDown () {
 
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
+
+        //change direction
+        direction = 'down';
     }
 }
 
@@ -48,6 +55,9 @@ function moveLeft () {
 
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
+
+        //change direction
+        direction = 'left';
     }
 }
 
@@ -63,12 +73,9 @@ function moveRight () {
 
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
+
+        direction = 'right';
     }
-}
-
-//fire motion
-function fire () {
-
 }
 
 //pause function
@@ -90,10 +97,19 @@ function move (event) {
     } else if (event.keyCode == "39") {
         //right button
         moveRight();
-    } else if (event.keyCode == "32") {
+    } else if  (event.keyCode == "32") {
         //space bar 
+        //in weapons
         fire();
-    } else  if (event.keyCode == "19" || event.keyCode == "80" || event.keyCode == "27") {
+    } else if  (event.keyCode == "49" ||
+                event.keyCode == "50" ||
+                event.keyCode == "51" ||
+                event.keyCode == "52" ||
+                event.keyCode == "53") {
+        //keys 1,2,3,4,5
+        changeWeapons(event.keyCode);
+
+    } else if (event.keyCode == "19" || event.keyCode == "80" || event.keyCode == "27") {
         //pause or p or esc button
         pause();
     }

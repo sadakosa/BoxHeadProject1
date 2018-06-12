@@ -117,7 +117,7 @@ function botCheck () {
 }
 
 
-//have to figure out the bug
+
 function levelOne () {
 
     for(var i=0; i<3; i++){
