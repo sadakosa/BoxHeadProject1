@@ -72,6 +72,13 @@ function botCheck () {
         //get the bot position
         botPosition = parseInt(getBots[i].parentNode.id);
 
+        if(bots[getBots[i].id] <= 0) {
+            //check if hp is <= 0 and delete bot if so
+            var botBox = getBots[i].parentNode;
+            botBox.removeChild(getBots[i]);
+            botBox.classList.remove('botBox');
+        }
+
         if(checkBeside(playPosition, botPosition)) {
             //bot is directly beisde the player, damages the player at each interval
             hp -= 40;
@@ -135,10 +142,9 @@ function levelOne () {
         botBox.classList.add("botBox");
 
         console.log('heyo');
-
-        setInterval(botCheck, 4000);
     }
 
+    setInterval(botCheck, 1000);
     console.log(Object.keys(bots));
     console.log(Object.values(bots));
     

@@ -43,7 +43,8 @@ function setup () {
     document.addEventListener('keydown', move);
 
     levelOne();
-    // setInterval(checkWinLoss, 1000);
+    var int = setInterval(function () {checkWinLoss(int)}, 1000);
+
 }
 
 //record the name
