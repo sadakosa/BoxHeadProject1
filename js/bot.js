@@ -1,3 +1,5 @@
+var bots = {};
+
 function botMove(dir, nMove, bot) {
     var botBox = bot.parentNode;
     var botPosition = parseInt(bot.parentNode.id);
@@ -73,7 +75,6 @@ function botCheck () {
         if(checkBeside(playPosition, botPosition)) {
             //bot is directly beisde the player, damages the player at each interval
             hp -= 40;
-            console.log('hp', hp);
         } else if(playPosition > botPosition) {
 
             if (playPosition < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
@@ -120,9 +121,14 @@ function botCheck () {
 
 function levelOne () {
 
-    for(var i=0; i<3; i++){
+    for(var i=1; i<4; i++){
+        //creating the div for bot
         var bot = document.createElement('div');
         bot.classList.add('bot');
+        bots['bot'+i.toString()] = 1000;
+        bot.id = 'bot'+i.toString();
+
+        //randomly placing the bot
         var x = (Math.floor(Math.random() * num * num) + 1).toString()
         var botBox = document.getElementById(x);
         botBox.appendChild(bot);
@@ -130,8 +136,11 @@ function levelOne () {
 
         console.log('heyo');
 
-        setInterval(botCheck, 1000);
+        setInterval(botCheck, 4000);
     }
+
+    console.log(Object.keys(bots));
+    console.log(Object.values(bots));
     
 }
 

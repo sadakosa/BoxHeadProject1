@@ -35,6 +35,7 @@ function setup () {
 
     //adding player to grid
     player = document.createElement('div');
+    player.id = 'player';
     var playerBox = document.getElementById(num*num/2);
     playerBox.appendChild(player);
     playerBox.classList.add('playerBox');
