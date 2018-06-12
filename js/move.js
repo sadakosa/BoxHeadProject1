@@ -6,17 +6,27 @@ var playerWeapon = 'pistol';
 var direction = 'left';
 var hp = 1000;
 
-function changeImageDir(dir) {
-    var playerBox = player.parentNode;
-    if (dir == 'up') {
-        playerBox.style.transform = "rotate(0deg)";
-    } else if (dir == 'down') {
-        playerBox.style.transform = "rotate(180deg)";
-    } else if (dir == 'left') {
-        playerBox.style.transform = "rotate(270deg)";
-    } else if (dir == 'right') {
-        playerBox.style.transform = "rotate(90deg)";
+function changeImageDir(entity, dir, node) {
+    if(entity == 'player') {
+        var playerBox = player.parentNode;
+        if (dir == 'up') {
+            playerBox.style.transform = "rotate(0deg)";
+        } else if (dir == 'down') {
+            playerBox.style.transform = "rotate(180deg)";
+        } else if (dir == 'left') {
+            playerBox.style.transform = "rotate(270deg)";
+        } else if (dir == 'right') {
+            playerBox.style.transform = "rotate(90deg)";
+        }
+    } else if (entity == 'bullet') {
+        var bulletBox = node.parentNode;
+        if(dir == 'right' || dir == 'left') {
+            bulletBox.style.transform = "rotate(90deg)";
+        } else {
+            bulletBox.style.transform = 'rotate(180deg)';
+        }
     }
+    
 }
 
 
@@ -35,7 +45,7 @@ function moveUp () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
-        changeImageDir('up')
+        changeImageDir('player', 'up')
         //change direction
         direction = 'up';
     }
@@ -54,7 +64,7 @@ function moveDown () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
-        changeImageDir('down');
+        changeImageDir('player', 'down');
         //change direction
         direction = 'down';
     }
@@ -73,7 +83,7 @@ function moveLeft () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
-        changeImageDir('left');
+        changeImageDir('player', 'left');
         //change direction
         direction = 'left';
     }
@@ -92,7 +102,7 @@ function moveRight () {
         newBox.classList.add('playerBox');
         newBox.appendChild(player);
 
-        changeImageDir('right');
+        changeImageDir('player', 'right');
         direction = 'right';
     }
 }

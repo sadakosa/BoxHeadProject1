@@ -4,7 +4,8 @@ function checkWinLoss (int) {
 
     if(getBots.length == 0) {
         alert('you won!');
-        clearTimeout(int);
+        clearInterval(int);
+        clearInterval(botCheckInt);
     }
 
     if(hp <= 0) {

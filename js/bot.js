@@ -1,4 +1,5 @@
 var bots = {};
+var botCheckInt;
 
 function botMove(dir, nMove, bot) {
     var botBox = bot.parentNode;
@@ -144,7 +145,7 @@ function levelOne () {
         console.log('heyo');
     }
 
-    setInterval(botCheck, 500);
+    botCheckInt = setInterval(botCheck, 500);
     console.log(Object.keys(bots));
     console.log(Object.values(bots));
     

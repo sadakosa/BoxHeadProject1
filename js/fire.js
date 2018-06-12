@@ -12,7 +12,7 @@ function checkIdentity (entity) {
     }
 }
 
-//movement of a bullet
+//subsequent movement of a bullet
 function bulletCheckMove (dir, bullet, int)  {
     var bulletBox = bullet.parentNode;
     if( bulletBox === null ){
@@ -52,6 +52,7 @@ function bulletCheckMove (dir, bullet, int)  {
             var newBox = document.getElementById((bulletId - 1).toString())
             newBox.appendChild(bullet);
             newBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'left', bullet);
         } else {
             //remove from old box
             bulletBox.removeChild(bullet);
@@ -68,6 +69,7 @@ function bulletCheckMove (dir, bullet, int)  {
             var newBox = document.getElementById((bulletId + 1).toString())
             newBox.appendChild(bullet);
             newBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'right', bullet);
         } else {
             //remove from old box
             bulletBox.removeChild(bullet);
@@ -84,6 +86,7 @@ function bulletCheckMove (dir, bullet, int)  {
             var newBox = document.getElementById((bulletId - num).toString())
             newBox.appendChild(bullet);
             newBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'up', bullet);
         } else {
             //remove from old box
             bulletBox.removeChild(bullet);
@@ -100,6 +103,7 @@ function bulletCheckMove (dir, bullet, int)  {
             var newBox = document.getElementById((bulletId + num).toString())
             newBox.appendChild(bullet);
             newBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'down', bullet);
         } else {
             //remove from old box
             bulletBox.removeChild(bullet);
@@ -130,6 +134,7 @@ function fire () {
                 var bulletBox = document.getElementById((playerId - 1).toString())
                 bulletBox.appendChild(bullet);
                 bulletBox.classList.add('bulletBox');
+                changeImageDir('bullet', 'left', bullet);
                 var int = setInterval(function () {bulletCheckMove('left', bullet, int)}, 20);
             }
         } else if (direction == 'right') {
@@ -137,6 +142,7 @@ function fire () {
                 var bulletBox = document.getElementById((playerId+1).toString())
                 bulletBox.appendChild(bullet);
                 bulletBox.classList.add('bulletBox');
+                changeImageDir('bullet', 'right', bullet);
                 var int = setInterval(function () {bulletCheckMove('right', bullet, int)}, 20);
             }
         } else if (direction == 'up') {
@@ -144,6 +150,7 @@ function fire () {
                 var bulletBox = document.getElementById((playerId-num).toString())
                 bulletBox.appendChild(bullet);
                 bulletBox.classList.add('bulletBox');
+                changeImageDir('bullet', 'up', bullet);
                 var int = setInterval(function() {bulletCheckMove('up', bullet, int)}, 20);
             }
         } else if (direction == 'down') {
@@ -151,6 +158,7 @@ function fire () {
                 var bulletBox = document.getElementById((playerId+num).toString())
                 bulletBox.appendChild(bullet);
                 bulletBox.classList.add('bulletBox');
+                changeImageDir('bullet', 'up', bullet);
                 var int = setInterval(function () {bulletCheckMove('down', bullet, int)}, 20);
             }
         }

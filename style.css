@@ -64,6 +64,7 @@ body {
 }
 
 .bulletBox {
-    background-color: black;
-    background-image:
+    /* background-color: black; */
+    background-image: url('img/gunB.png');
+    background-size: contain;
 }
