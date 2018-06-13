@@ -125,24 +125,41 @@ function botCheck () {
 
 }
 
+function createBot (i) {
+    //creating the div for bot
+    var bot = document.createElement('div');
+    bot.classList.add('bot');
+    bots['bot'+i.toString()] = 1000;
+    bot.id = 'bot'+i.toString();
 
+    //randomly placing the bot
+    // var x = (Math.floor(Math.random() * num * num) + 1).toString()
+    var x = (Math.floor(Math.random() * 3) + 1)
+    console.log(x);
+    var y;
+    if(x  ==  1) {
+        y = '541';
+    } else if (x == 2) {
+        y = '1278';
+    } else if (x == 3) {
+        y = '18';
+    }
+    console.log(y);
+    var botBox = document.getElementById(y);
+    console.log(botBox);
+    botBox.appendChild(bot);
+    botBox.classList.add("botBox");
+
+    // var botBox = document.getElementById(x);
+    // botBox.appendChild(bot);
+    // botBox.classList.add("botBox");
+    console.log('heyo');
+}
 
 function levelOne () {
 
-    for(var i=1; i<11; i++){
-        //creating the div for bot
-        var bot = document.createElement('div');
-        bot.classList.add('bot');
-        bots['bot'+i.toString()] = 1000;
-        bot.id = 'bot'+i.toString();
-
-        //randomly placing the bot
-        var x = (Math.floor(Math.random() * num * num) + 1).toString()
-        var botBox = document.getElementById(x);
-        botBox.appendChild(bot);
-        botBox.classList.add("botBox");
-
-        console.log('heyo');
+    for(var i=1; i<16; i++){
+        setTimeout(function () {createBot(i)}, 1000)
     }
 
     botCheckInt = setInterval(botCheck, 500);
