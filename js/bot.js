@@ -84,6 +84,10 @@ function checkBeside (play, bot) {
     }
 }
 
+
+
+
+
 function currentMove (direct, previous, current, up, down, left, right, newCurrent, defaultCurrent) {
     // console.log("initial current: " + current);
     // console.log("previous: " + previous);
@@ -160,7 +164,7 @@ function determine (previous, current, up, down, left, right, newCurrent, defaul
     }
 }
 
-
+//predict where the bot is going
 function predictPlay (previous, current) {
     var up = 0;
     var down = 0;
@@ -170,6 +174,16 @@ function predictPlay (previous, current) {
     var defaultCurrent = current;
     determine(previous, current, up, down,  left, right, newCurrent, defaultCurrent);
 }
+
+
+
+
+function moveRandom () {
+
+}
+
+
+
 
 
 //check where the player is relative to the bot and call the botMove function with arguments
@@ -277,14 +291,28 @@ function createBot (i) {
     botBox.appendChild(bot);
     botBox.classList.add("botBox");
 
+    // console.log(bots);
+    // debugger;
     console.log('heyo');
 }
 
 function levelOne () {
 
-    for(var i=1; i<8; i++){
-        setTimeout(function () {createBot(i)}, 1000)
-    }
+    // for(var i=1; i<8; i++){
+    //     console.log('i: ' + i);
+    //     setTimeout(function () {createBot(i)}, 1000)
+    // }
+    var i = 1;
+    var x = setInterval(function() {
+        createBot(i);
+
+        i += 1;
+
+        if (i >= 8) {
+            clearInterval(x);
+        };
+    },500);
+
     botCheckInt = setInterval(botCheck, 500);
     console.log(Object.keys(bots));
     console.log(Object.values(bots));
