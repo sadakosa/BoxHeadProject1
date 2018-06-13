@@ -1,3 +1,8 @@
+function createWalls () {
+    
+}
+
+
 function setup () {
     nameRecord();
 
@@ -32,6 +37,8 @@ function setup () {
     // container[0].appendChild(text);
     container[0].appendChild(bigBox);
 
+    //creating walls
+    createWalls();
 
     //adding player to grid
     player = document.createElement('div');
