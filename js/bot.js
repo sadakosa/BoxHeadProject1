@@ -3,6 +3,7 @@ var botCheckInt;
 var previousPlay;
 var counter = 0;
 var target;
+var idInRadius = [];
 
 function botMove(dir, nMove, bot) {
     if (bot.parentNode != null) {
@@ -183,6 +184,211 @@ function moveRandom () {
 }
 
 
+function moveFollow (target, botPosition, getBots, i) {
+    if(checkBeside(target, botPosition)) {
+        //bot is directly beside the player, damages the player at each interval
+        hp -= 40;
+    } else if(target > botPosition) {
+
+        if (target < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
+            //same row, player is to the right of the bot
+            botMove('add', 1, getBots[i]);
+        } else {
+            //player is below bot
+            if((target-botPosition)%num ==0) {
+                //player is vertically below bot
+                botMove('add', num, getBots[i]);
+            } else if (checkEntityCol(target) > checkEntityCol(botPosition)) {
+                //player is diagonally right below bot --> \ diagonally right
+                botMove('add', num+1, getBots[i]);
+            } else if (checkEntityCol(target) < checkEntityCol(botPosition)) {
+                //player is diagonally left below bot --> \ diagonally left
+                botMove('add', num-1, getBots[i]);
+            }
+        }
+
+    } else if (target < botPosition) {
+
+        if (botPosition < Math.floor(target/num)+checkNumCol(target)) {
+            //same row, player is to the left of the bot
+            botMove('minus', 1, getBots[i]);
+        } else {
+            //player is above bot
+            if((botPosition-target)%num ==0) {
+                //player is vertically above bot
+                botMove('minus', num, getBots[i]);
+            } else if (checkEntityCol(target) > checkEntityCol(botPosition)) {
+                //player is diagonally left above bot --> / diagonally left
+                botMove('minus', num-1, getBots[i]);
+            } else if (checkEntityCol(target) < checkEntityCol(botPosition)) {
+                //player is diagonally right above bot --> \ diagonally right
+                botMove('minus',  num+1, getBots[i]);
+            }
+        }
+    }
+}
+
+
+
+
+
+//check for bots within a certain radius from the player
+function checkRadius (playPosition) {
+    var rad = 2;
+    idInRadius = [];
+
+    if (playPosition == 1) {
+        //when the player is in the top left corner of the bigBox
+        for (var i=1; i<=rad; i++) {
+            var diagKey = playPosition+((num+1)*i);
+
+            for(var a=1; a<=i; a++) {
+                idInRadius.push((diagKey+(num*a)).toString());
+                idInRadius.push((diagKey-(1*a)).toString());
+            }
+            
+            idInRadius.push(diagKey.toString());
+        }
+    } else if (playPosition == num) {
+        //when the player is in the top right corner of the bigBox
+        for(var i=1; i<=rad; i++) {
+            var diagKey = playPosition + ((num-1)*i);
+
+            for(var a=1; a<=i; a++) {
+                idInRadius.push((diagKey-(num*a)).toString());
+                idInRadius.push((diagKey+(1*a)).toString());
+            }
+            
+            idInRadius.push(diagKey.toString());
+        }
+    } else if (playPosition == (num*num)-num+1) {
+        //when the player is in the bottom left corner of the bigBox
+        for(var i=1; i<=rad; i++) {
+            var diagKey = playPosition - ((num-1)*i);
+
+            for(var a=1; a<=rad; a++) {
+                idInRadius.push((diagKey-(1*a)).toString());
+                idInRadius.push((diagKey+(num*a)).toString());
+            }
+            
+            idInRadius.push(diagKey.toString());
+        }
+    } else if (playPosition == num*num) {
+        //when the player is in the bottom right corner of the bigBox
+        for(var i=1; i<=rad; i++) {
+            var diagKey = playPosition - ((num+1)*i);
+
+            for(var a=1; a<=i; a++) {
+                idInRadius.push((diagKey+(i*a)).toString());
+                idInRadius.push((diagKey+(num*a)).toString());
+            }
+
+            idInRadius.push(diagKey.toString());
+        }
+    } else if (playPosition <= num) {
+        //when the player is in the top row of the bigBox
+        for(var i=1; i<=rad; i++) {
+            var bl = playPosition+((num-1)*i);
+            var br = playPosition+((num+1)*i);
+
+            for (var a=1; a<=i; a++) {
+                idInRadius.push((bl-(num*a)).toString());
+                idInRadius.push((br-(num*a)).toString());
+            }
+
+            for(var a=1; a<=1+((i-1)*2); a++) {
+                idInRadius.push((bl+(1*a)).toString());
+            }
+
+            idInRadius.push(bl.toString());
+            idInRadius.push(br.toString());
+        }
+    } else if (playPosition > (num*num)-num) {
+        //when the player is in the bottom row of the bigBox
+        for(var i=1; i<=rad; i++) {
+            var tl = playPosition-((num+1)*i);
+            var tr = playPosition-((num-1)*i);
+
+            for (var a=1; a<=i; a++) {
+                idInRadius.push((tr+(num*a)).toString());
+                idInRadius.push((tl+(num*a)).toString());
+            }
+
+            for(var a=1; a<=1+((i-1)*2); a++) {
+                idInRadius.push((tl+(1*a)).toString());
+            }
+
+            idInRadius.push(tl.toString());
+            idInRadius.push(tr.toString());
+        }
+    } else if (playPosition%num == 0) {
+        //when the player is in the right row of the bigBox
+        for(var i=1; i<=rad; i++) {
+            var tl = playPosition-((num+1)*i);
+            var bl = playPosition+((num-1)*i);
+
+            for(var a=1; a<=i; a++) {
+                idInRadius.push((tl+(1*a)).toString());
+                idInRadius.push((bl+(1*a)).toString());
+            }
+
+            for(var a=1; a<=1+((i-1)*2); a++) {
+                idInRadius.push((tl+(num*a)).toString());
+            }
+
+            idInRadius.push(tl.toString());
+            idInRadius.push(bl.toString());
+        }
+    } else if ((playPosition - 1)%num == 0) {
+        //when the player is in the left row of the bigBox
+        for(var i=0; i<=rad; i++) {
+            var tr = playPosition-((num-1)*i);
+            var br = playPosition+((num+1)*i);
+
+            for(var a=0; a<=rad; a++) {
+                idInRadius.push((tr-(1*a)).toString());
+                idInRadius.push((br-(1*a)).toString());
+            }
+
+            for(var a=1; a<=1+((i-1)*2); a++) {
+                idInRadius.push((tr+(num*a)).toString());
+            }
+
+            idInRadius.push(tl.toString());
+            idInRadius.push(bl.toString());
+        }
+    } else {
+        //for when the player is not touching the walls
+        for(var a=1; a<=rad; a++) {
+            //finding the ids of the corners of the divs of distance a from the player
+            var tr = playPosition - (num-1)*a;
+            var tl = playPosition - (num+1)*a;
+            var br = playPosition + (num+1)*a;
+            var bl = playPosition + (num-1)*a;
+    
+            //adding the ids of the corners to the array
+            idInRadius.push(tr.toString());
+            idInRadius.push(tl.toString());
+            idInRadius.push(br.toString());
+            idInRadius.push(bl.toString());
+    
+            //finding the ids of everything in between the corners
+            for (var b=1; b<= 1+(a-1)*2; b++) {
+                idInRadius.push((tr + num*b).toString());
+                idInRadius.push((tl + 1*b).toString());
+                idInRadius.push((br - 1*b).toString());
+                idInRadius.push((bl - num*b).toString());
+            }
+        }
+    }
+    
+
+    console.log('radius: ' + idInRadius);
+    debugger;
+}
+
+
+
 
 
 
@@ -219,47 +425,14 @@ function botCheck () {
                 botBox.classList.remove('botBox');
             }
 
-            if(checkBeside(target, botPosition)) {
-                //bot is directly beside the player, damages the player at each interval
-                hp -= 40;
-            } else if(target > botPosition) {
+            checkRadius(playPosition);
 
-                if (target < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
-                    //same row, player is to the right of the bot
-                    botMove('add', 1, getBots[i]);
-                } else {
-                    //player is below bot
-                    if((target-botPosition)%num ==0) {
-                        //player is vertically below bot
-                        botMove('add', num, getBots[i]);
-                    } else if (checkEntityCol(target) > checkEntityCol(botPosition)) {
-                        //player is diagonally right below bot --> \ diagonally right
-                        botMove('add', num+1, getBots[i]);
-                    } else if (checkEntityCol(target) < checkEntityCol(botPosition)) {
-                        //player is diagonally left below bot --> \ diagonally left
-                        botMove('add', num-1, getBots[i]);
-                    }
-                }
-
-            } else if (target < botPosition) {
-
-                if (botPosition < Math.floor(target/num)+checkNumCol(target)) {
-                    //same row, player is to the left of the bot
-                    botMove('minus', 1, getBots[i]);
-                } else {
-                    //player is above bot
-                    if((botPosition-target)%num ==0) {
-                        //player is vertically above bot
-                        botMove('minus', num, getBots[i]);
-                    } else if (checkEntityCol(target) > checkEntityCol(botPosition)) {
-                        //player is diagonally left above bot --> / diagonally left
-                        botMove('minus', num-1, getBots[i]);
-                    } else if (checkEntityCol(target) < checkEntityCol(botPosition)) {
-                        //player is diagonally right above bot --> \ diagonally right
-                        botMove('minus',  num+1, getBots[i]);
-                    }
-                }
+            if (true) {
+                moveFollow (target, botPosition, getBots, i);
+            } else {
+                moveRandom(botPosition, getBots, i);
             }
+            
         }
     }
 
@@ -291,17 +464,9 @@ function createBot (i) {
     botBox.appendChild(bot);
     botBox.classList.add("botBox");
 
-    // console.log(bots);
-    // debugger;
-    console.log('heyo');
 }
 
 function levelOne () {
-
-    // for(var i=1; i<8; i++){
-    //     console.log('i: ' + i);
-    //     setTimeout(function () {createBot(i)}, 1000)
-    // }
     var i = 1;
     var x = setInterval(function() {
         createBot(i);
