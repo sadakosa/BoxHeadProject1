@@ -14,6 +14,7 @@ var player;
 var playerWeapon = 'pistol';
 var direction = 'left';
 var hp = 1000;
+var checkPause = false;
 
 function changeImageDir(entity, dir, node) {
     if(entity == 'player') {
@@ -121,9 +122,36 @@ function moveRight () {
     }
 }
 
+var playerBoxPause;
 //pause function
 function pause () {
+    console.log('pausing')
+    if(checkPause) {
+        //make bots move
+        botCheckInt = setInterval(botCheck, 500);
+        //re-introduce player
+        playerBoxPause.appendChild(player);
+        playerBoxPause.classList.add('playerBox');
+        //delete text for pause
+        var text = document.getElementsByClassName('text')[0].childNodes[0];
+        text.style.color = 'white';
 
+        checkPause = false;
+    } else {
+        //make bots stop
+        clearInterval(botCheckInt);
+        //get rid of player
+        var playerBox = player.parentNode;
+        playerBoxPause = player.parentNode;
+        playerBox.removeChild(player);
+        playerBox.classList.remove('playerBox');
+        //create text for pause
+        var text = document.getElementsByClassName('text')[0].childNodes[0];
+        text.style.color = 'black';
+        text.innerText = 'PAUSED';
+
+        checkPause = true;
+    }
 }
 
 function move (event) {
