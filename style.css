@@ -37,7 +37,7 @@ body {
 
 
 .right {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 29%;
     display: inline-block;
     vertical-align: top;
@@ -139,3 +139,37 @@ h1 {
     height: 30px;
     background-color: #4CAF50;
   }
+
+.weapons {
+    position: relative;
+    margin-top: 40px;
+}
+
+.weaponBox {
+    width: 99%;
+    height: 80px;
+    background-color: beige;
+    color: brown;
+    border: 1px solid grey;
+    margin: 10px auto;
+    position: relative;
+    top: 10px;
+    border-radius: 10px;
+}
+
+.noWeaponBox {
+    width: 99%;
+    height: 80px;
+    background-color: gray;
+    color: darkgray;
+    border: 1px solid black;
+    margin: 10px auto;
+    position: relative;
+    top: 10px;
+    border-radius: 10px;
+}
+
+.botsLeft {
+    position: relative;
+    margin-top: 40px;
+}

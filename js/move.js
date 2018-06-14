@@ -7,6 +7,7 @@ var weaponsStats = document.getElementsByClassName('weapons');
 var botsLeft = document.getElementsByClassName('botsLeft');
 //general
 var name;
+var botsLeftNumber = 20;
 var num = 30;
 var player;
 var playerWeapon = 'pistol';

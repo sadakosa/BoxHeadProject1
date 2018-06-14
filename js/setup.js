@@ -62,14 +62,23 @@ function buildRight() {
     //build Name + Stats
     var nameBox = document.getElementsByClassName('name');
     var nameStats = document.createElement('h1');
-    console.log(name);
-    nameStats.innerText = name + "'s Stats";
-    nameBox[0].appendChild(nameStats);
+
+    if(name != '') {
+        nameStats.innerText = name + "'s Stats";
+        nameBox[0].appendChild(nameStats);
+    } else {
+        nameStats.innerText = "anything";
+        nameStats.style.color = 'white';
+        nameBox[0].appendChild(nameStats);
+    }
+    
 
     //display HP
         //text for HP
-        var myHealth = 
-        
+        var myHealth = document.createElement('h3');
+        myHealth.innerText = 'HP: ' + hp + " / 1000"
+        health[0].appendChild(myHealth);
+
         //creating progress bar
         var myProgress =  document.createElement('div');
         var myBar = document.createElement('div');
@@ -78,15 +87,101 @@ function buildRight() {
         myProgress.appendChild(myBar);
         health[0].appendChild(myProgress);
 
-    
-
     //build Weapons
-    
-    var pistolStats = document.createElement('div');
-    
+        //text for weapons
+        var weaponText = document.createElement('h3');
+        weaponText.innerText = 'Weapon Stats: '
+        weaponsStats[0].appendChild(weaponText);
+
+        //weapon stats
+        var pistolStats = document.createElement('div');
+        var shotgunStats = document.createElement('div');
+        var grenadeStats = document.createElement('div');
+
+        pistolStats.classList.add('weaponBox');
+        if (noWeapons[1] != 0) {
+            shotgunStats.classList.add('weaponBox');
+        } else {
+            shotgunStats.classList.add('noWeaponBox');
+        }
+
+        if (noWeapons[2] != 0) {
+            grenadeStats.classList.add('weaponBox');
+        } else {
+            grenadeStats.classList.add('noWeaponBox');
+        }
+
+        //adding stats to the Pistol divs
+        var imgP = document.createElement('div');
+        var nameP = document.createElement('div');
+        var numberP = document.createElement('div');
+        var damageP = document.createElement('div');
+
+        imgP.classList.add('weaponImg');
+        nameP.classList.add('weaponName');
+        numberP.classList.add('weaponNumber');
+        damageP.classList.add('weaponDamage');
+
+        nameP.innerText = 'Pistol';
+        numberP.innerHTML = "available: ∞";
+        damageP.innerText = 'damage: ' + weapons.pistol.damage;        
+
+        pistolStats.appendChild(imgP);
+        pistolStats.appendChild(nameP);
+        pistolStats.appendChild(numberP);
+        pistolStats.appendChild(damageP);
+
+        //adding stats to the Shotgun divs
+        var imgS = document.createElement('div');
+        var nameS = document.createElement('div');
+        var numberS = document.createElement('div');
+        var damageS = document.createElement('div');
+
+        imgS.classList.add('weaponImg');
+        nameS.classList.add('weaponName');
+        numberS.classList.add('weaponNumber');
+        damageS.classList.add('weaponDamage');
+
+        nameS.innerText = 'Shotgun';
+        numberS.innerText = 'available: ' + noWeapons[1]
+        damageS.innerText = 'damage: ' + weapons.shotgun.damage;
+
+        shotgunStats.appendChild(imgS);
+        shotgunStats.appendChild(nameS);
+        shotgunStats.appendChild(numberS);
+        shotgunStats.appendChild(damageS);
+
+        //adding stats to the Grenade divs
+        var imgG = document.createElement('div');
+        var nameG = document.createElement('div');
+        var numberG = document.createElement('div');
+        var damageG = document.createElement('div');
+
+        imgG.classList.add('weaponImg');
+        nameG.classList.add('weaponName');
+        numberG.classList.add('weaponNumber');
+        damageG.classList.add('weaponDamage');
+
+        nameG.innerText = 'Grenade';
+        numberG.innerText = 'available: ' + noWeapons[2]
+        damageG.innerText = 'damage: ' + weapons.grenade.damage;
+
+        grenadeStats.appendChild(imgG);
+        grenadeStats.appendChild(nameG);
+        grenadeStats.appendChild(numberG);
+        grenadeStats.appendChild(damageG);
+        
+
+        weaponsStats[0].appendChild(pistolStats);
+        weaponsStats[0].appendChild(shotgunStats);
+        weaponsStats[0].appendChild(grenadeStats);
 
     //Bots Left
-    var botsLeft = document.getElementsByClassName('botsLeft');
+    var botsLeftText = document.createElement('h3');
+    botsLeftText.innerText = 'Bots left: ' + botsLeftNumber + " / 20";
+    console.log(botsLeft[0]);
+    botsLeft[0].appendChild(botsLeftText);
+    console.log(botsLeft[0]);
 }
 
 
