@@ -68,6 +68,21 @@ function checkBeside (play, bot) {
     }
 }
 
+//check if the bot is diagonal to the player
+function checkDiagonal (play, bot) {
+    if(play-bot == num+1) {
+        return true;
+    } else if (play-bot == num-1) {
+        return true;
+    } else if (bot-play == num+1) {
+        return true;
+    } else if (bot-play == num-1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 
 
@@ -231,7 +246,7 @@ function moveRandom (playPosition, botPosition, getBots, i) {
 
 //for the bots to follow the player
 function moveFollowEasy (playPosition, target, botPosition, getBots, i) {
-    if(checkBeside(playPosition, botPosition)) {
+    if(checkBeside(playPosition, botPosition) || checkDiagonal(playPosition, botPosition)) {
         //bot is directly beside the player, damages the player at each interval
         hp -= 40;
     } else if(target > botPosition) {
@@ -535,7 +550,7 @@ function levelOne () {
 
         i += 1;
 
-        if (i >= 1) {
+        if (i >= 5) {
             clearInterval(x);
         };
     },500);

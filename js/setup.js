@@ -76,6 +76,7 @@ function buildRight() {
     //display HP
         //text for HP
         var myHealth = document.createElement('h3');
+        myHealth.id = 'hp';
         myHealth.innerText = 'HP: ' + hp + " / 1000"
         health[0].appendChild(myHealth);
 
@@ -210,7 +211,7 @@ function setup () {
     levelOne();
 
     //checking for Win Loss Situation
-    var int = setInterval(function () {checkWinLoss(int)}, 1000);
+    var int = setInterval(function () {checkWinLoss(int)}, 500);
 
     //build right side DOM
     buildRight();
