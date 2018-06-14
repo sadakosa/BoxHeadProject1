@@ -544,7 +544,7 @@ function createBot (i) {
 }
 
 function levelOne () {
-    var i = 1;
+    var i = 0;
     var x = setInterval(function() {
         createBot(i);
 

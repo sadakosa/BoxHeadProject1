@@ -207,10 +207,10 @@ function setup () {
     //listen for keydown strokes
     document.addEventListener('keydown', move);
 
-    //getting zombies
+    //getting zombies --> in bot.js
     levelOne();
 
-    //checking for Win Loss Situation
+    //checking for Win Loss Situation --> in check.js
     var int = setInterval(function () {checkWinLoss(int)}, 500);
 
     //build right side DOM

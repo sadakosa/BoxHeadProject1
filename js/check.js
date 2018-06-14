@@ -1,3 +1,11 @@
+var check = 0;
+
+function updateProgressBar() {
+    var elem = document.getElementById("myBar");   
+    var width = (hp/1000)*100;
+
+    elem.style.width = width + '%'; 
+}
 
 function checkWinLoss (int) {
     var getBots = document.getElementsByClassName('bot');
@@ -10,7 +18,7 @@ function checkWinLoss (int) {
     updateProgressBar();
 
     //checking if ded
-    if(getBots.length == 0) {
+    if(getBots.length == 0 && check>=2) {
         var text = document.getElementsByClassName('text')[0].childNodes[0];
         text.style.color = 'green';
         text.innerText = 'YOU WON!';
@@ -18,7 +26,7 @@ function checkWinLoss (int) {
         clearInterval(botCheckInt);
     }
 
-    if(hp <= 0) {
+    if(hp <= 0 && check>=2) {
         var text = document.getElementsByClassName('text')[0].childNodes[0];
         text.style.color = 'red';
         text.innerText = 'YOU LOST!';
@@ -30,11 +38,6 @@ function checkWinLoss (int) {
 
         clearInterval(int);
     }
+
+    check++;
 }
-
-function updateProgressBar() {
-    var elem = document.getElementById("myBar");   
-    var width = (hp/1000)*100;
-
-    elem.style.width = width + '%'; 
-  }
