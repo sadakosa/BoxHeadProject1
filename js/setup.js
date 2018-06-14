@@ -78,7 +78,7 @@ function buildRight() {
         var myHealth = document.createElement('h3');
         myHealth.id = 'hp';
         myHealth.innerText = 'HP: ' + hp + " / 1000"
-        health[0].appendChild(myHealth);
+        health.appendChild(myHealth);
 
         //creating progress bar
         var myProgress =  document.createElement('div');
@@ -86,13 +86,13 @@ function buildRight() {
         myProgress.id = 'myHealth';
         myBar.id = 'myBar';
         myProgress.appendChild(myBar);
-        health[0].appendChild(myProgress);
+        health.appendChild(myProgress);
 
     //build Weapons
         //text for weapons
         var weaponText = document.createElement('h3');
         weaponText.innerText = 'Weapon Stats: '
-        weaponsStats[0].appendChild(weaponText);
+        weaponsStats.appendChild(weaponText);
 
         //weapon stats
         var pistolStats = document.createElement('div');
@@ -118,13 +118,13 @@ function buildRight() {
         var numberP = document.createElement('div');
         var damageP = document.createElement('div');
 
-        imgP.classList.add('weaponImg');
+        imgP.classList.add('weaponImgPistol');
         nameP.classList.add('weaponName');
         numberP.classList.add('weaponNumber');
-        damageP.classList.add('weaponDamage');
+        damageP.classList.add('weaponDamagePistol');
 
         nameP.innerText = 'Pistol';
-        numberP.innerHTML = "available: ∞";
+        numberP.innerHTML = "available: ∞   ";
         damageP.innerText = 'damage: ' + weapons.pistol.damage;        
 
         pistolStats.appendChild(imgP);
@@ -138,7 +138,7 @@ function buildRight() {
         var numberS = document.createElement('div');
         var damageS = document.createElement('div');
 
-        imgS.classList.add('weaponImg');
+        imgS.classList.add('weaponImgShotgun');
         nameS.classList.add('weaponName');
         numberS.classList.add('weaponNumber');
         damageS.classList.add('weaponDamage');
@@ -158,7 +158,7 @@ function buildRight() {
         var numberG = document.createElement('div');
         var damageG = document.createElement('div');
 
-        imgG.classList.add('weaponImg');
+        imgG.classList.add('weaponImgGrenade');
         nameG.classList.add('weaponName');
         numberG.classList.add('weaponNumber');
         damageG.classList.add('weaponDamage');
@@ -173,16 +173,33 @@ function buildRight() {
         grenadeStats.appendChild(damageG);
         
 
-        weaponsStats[0].appendChild(pistolStats);
-        weaponsStats[0].appendChild(shotgunStats);
-        weaponsStats[0].appendChild(grenadeStats);
+        weaponsStats.appendChild(pistolStats);
+        weaponsStats.appendChild(shotgunStats);
+        weaponsStats.appendChild(grenadeStats);
 
     //Bots Left
     var botsLeftText = document.createElement('h3');
     botsLeftText.innerText = 'Bots left: ' + botsLeftNumber + " / 20";
-    console.log(botsLeft[0]);
-    botsLeft[0].appendChild(botsLeftText);
-    console.log(botsLeft[0]);
+    botsLeft.appendChild(botsLeftText);
+
+    //Controls 
+    var controlsText = document.createElement('h3');
+    var controlDirection = document.createElement('p');
+    var controlFire = document.createElement('p');
+    var controlWeapons = document.createElement('p');
+    var controlPause = document.createElement('p');
+
+    controlsText.innerHTML = '<u>Controls:</u> ';
+    controlDirection.innerHTML = '- use the <b>up/down/left/right</b> arrows to move the shooter around';
+    controlFire.innerHTML = '- press + hold <b>spacebar</b> to shoot';
+    controlWeapons.innerHTML = '- <b>key 1</b> for gun, <b>key 2</b> for shotgun, <b>key 3</b> for grenade';
+    controlPause.innerHTML = '- <b>p/esc</b> to pause';
+
+    controls.appendChild(controlsText);
+    controls.appendChild(controlDirection);
+    controls.appendChild(controlFire);
+    controls.appendChild(controlWeapons);
+    controls.appendChild(controlPause);
 }
 
 

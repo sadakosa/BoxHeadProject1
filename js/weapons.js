@@ -1,5 +1,5 @@
 
-var noWeapons = [1,10,0];
+var noWeapons = [1,10,3];
 
 var weapons = {
     'pistol': {

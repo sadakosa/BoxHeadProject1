@@ -2,9 +2,10 @@ var container = document.getElementsByClassName('container');
 //for the right side of the page
 var right = document.getElementsByClassName('right');
 var nameBox = document.getElementsByClassName('name');
-var health = document.getElementsByClassName('hp');
-var weaponsStats = document.getElementsByClassName('weapons');
-var botsLeft = document.getElementsByClassName('botsLeft');
+var health = document.getElementsByClassName('hp')[0];
+var weaponsStats = document.getElementsByClassName('weapons')[0];
+var botsLeft = document.getElementsByClassName('botsLeft')[0];
+var controls = document.getElementsByClassName('controls')[0];
 //general
 var name;
 var botsLeftNumber = 20;

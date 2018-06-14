@@ -6,7 +6,7 @@ body {
     position: relative;
     width: 80%;
     margin: 0 auto;
-    height: 97vh;
+    height: 95vh;
     border: 1px solid black;
     /* display: inline-block; */
 }
@@ -20,18 +20,18 @@ body {
     position: relative;
     width: 70%;
     margin: 0 auto;
-    height: 93%;
+    height: 92.5%;
     border: 1px solid black;
     display: inline-block;
 }
 
 .container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 90%;
 }
 
 .level {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 10%;
 }
 
@@ -74,21 +74,23 @@ h1 {
 }
 
 #name {
-    left: 38%;
+    left: 30%;
     position: absolute;
-    height: 30px;
-    width: 200px;
+    height: 50px;
+    width: 400px;
     display: block;
     margin: 0 auto;
+    font-size: 30px;
 }
 
 #select {
-    left: 46%;
+    left: 43%;
     /* position: absolute; */
     display: block;
-    top: 20px;
+    top: 42px;
     position: relative;
     padding: 10px;
+    font-size: 25px;
 }
 
 .button {
@@ -99,10 +101,12 @@ h1 {
     background-color: coral;
     display: block;
     color: white;
-    width: 100px;
-    height: 20px;
-    left: 43%;
-    top: 30px;
+    width: 150px;
+    height: 40px;
+    left: 40%;
+    top: 50px;
+    font-size: 27px;
+    border-radius: 10px;
     /* margin: 0 auto; */
 }
 
@@ -147,7 +151,7 @@ h1 {
 
 .weaponBox {
     width: 99%;
-    height: 80px;
+    height: 100px;
     background-color: beige;
     color: brown;
     border: 1px solid grey;
@@ -159,7 +163,7 @@ h1 {
 
 .noWeaponBox {
     width: 99%;
-    height: 80px;
+    height: 100px;
     background-color: gray;
     color: darkgray;
     border: 1px solid black;
@@ -173,3 +177,80 @@ h1 {
     position: relative;
     margin-top: 40px;
 }
+
+.controls {
+    color: purple;
+    padding: 1px 30px 0px  20px;
+}
+
+.weaponImgPistol {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    top: 8px;
+    left: 8px;
+    background-image: url('img/revolver.png');
+    display: inline-block;
+    /* border: 1px solid black; */
+    background-size: contain;
+}
+
+.weaponImgShotgun {
+    width: 80px;
+    height: 80px;
+    background-image: url('img/shotgun.png');
+    display: inline-block;
+    background-size: contain;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+.weaponImgGrenade {
+    width: 80px;
+    height: 80px;
+    background-image: url('img/grenade.png');
+    display: inline-block;
+    background-size: contain;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+
+.weaponName {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    top: 25px;
+    left: 30px;
+    font-size: 35px;
+}
+
+.weaponNumber {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    right: 25px;
+    float: right;
+    font-size: 20px;
+}
+
+.weaponDamagePistol {
+    display: inline-block;
+    position: relative;
+    top: 60px;
+    left: 85px;
+    float: right;
+    font-size: 20px;
+}
+
+.weaponDamage {
+    display: inline-block;
+    position: relative;
+    left: -20px;
+    bottom: 20px;
+    float: right;
+    font-size: 20px;
+}
+
