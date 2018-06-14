@@ -3,7 +3,7 @@ var botCheckInt;
 var previousPlay;
 var counter = 0;
 var target;
-var idInRadius = [];
+// var idInRadius = [];
 
 function botMove(dir, nMove, bot) {
     if (bot.parentNode != null) {
@@ -11,6 +11,7 @@ function botMove(dir, nMove, bot) {
         var botPosition = parseInt(bot.parentNode.id);
         
         if(dir == 'add') {
+            console.log(botPosition, nMove, botPosition+nMove);
             var newBox = document.getElementById((botPosition+nMove).toString());
             
             if(newBox.childNodes.length<1) {
@@ -19,16 +20,9 @@ function botMove(dir, nMove, bot) {
 
                 newBox.classList.add('botBox');
                 newBox.appendChild(bot);
-            // } else { //if it is blocked
-            //     newBox = document.getElementById((botPosition+nMove).toString())
-
-            //     botBox.removeChild(bot);
-            //     botBox.classList.remove('botBox');
-
-            //     newBox.classList.add('botBox');
-            //     newBox.appendChild(bot);
             }
         } else if (dir == 'minus') {
+            console.log(botPosition, nMove, botPosition-nMove);
             var newBox = document.getElementById((botPosition-nMove).toString());
             
             if(newBox.childNodes.length<1) {
@@ -37,15 +31,6 @@ function botMove(dir, nMove, bot) {
 
                 newBox.classList.add('botBox');
                 newBox.appendChild(bot);
-            // } else { //if it is blocked
-                
-            //     newBox = document.getElementById((botPosition+nMove).toString());
-
-            //     botBox.removeChild(bot);
-            //     botBox.classList.remove('botBox');
-
-            //     newBox.classList.add('botBox');
-            //     newBox.appendChild(bot);
             }
         }
     }
@@ -179,13 +164,85 @@ function predictPlay (previous, current) {
 
 
 
-function moveRandom () {
+function moveRandom (playPosition, botPosition, getBots, i) {
+    if(checkBeside(playPosition, botPosition)) {
+        //bot is directly beside the player, damages the player at each interval
+        hp -= 100;
+    } else {
+        var dir;
 
+        if (botPosition <= num) {
+            //bot is in top row
+            dir = Math.floor(Math.random()*8)+2;
+            if(dir == 5) {
+                dir = 6;
+            } else if (dir == 7) {
+                dir = 8;
+            }
+        } else if (botPosition > (num*num)-num) {
+            //bot is in bottom row
+            dir = Math.floor(Math.random()*8)+1;
+            if(dir == 2) {
+                dir = 1;
+            } else if (dir == 6) {
+                dir = 5;
+            } else if (dir == 8) {
+                dir = 7;
+            }
+        } else if (botPosition%num == 0) {
+            //bot is in right row
+            dir = Math.floor(Math.random()*8)+1;
+            if(dir == 4) {
+                dir = 3;
+            } else if (dir == 5) {
+                dir = 7;
+            } else if (dir == 6)  {
+                dir = 8;
+            }
+        } else if ((botPosition-1)%num == 0) {
+            //bot is in left row
+            dir = Math.floor(Math.random()*6)+1;
+            if(dir == 3) {
+                dir = 4;
+            }
+        } else {
+            //bot is not touch the edges of the bigBox
+            dir = Math.floor(Math.random()*8)+1;
+        }
+
+        if (dir == 1) {
+            //if 1, bot goes up
+            botMove('minus', num, getBots[i]);
+        } else if (dir == 2) {
+            //if 2, bot goes down
+            botMove('add', num, getBots[i]);
+        } else if (dir == 3) {
+            //if 3, bot goes left
+            botMove('minus', 1, getBots[i]);
+        } else if (dir == 4) {
+            //if 4, bot goes right
+            botMove('add', 1, getBots[i]);
+        } else if (dir == 5) {
+            //if 5, bot goes diaR up
+            botMove('minus', num-1, getBots[i]);
+        } else if (dir == 6) {
+            //if 6, bot goes diaR down
+            botMove('add', num-1, getBots[i]);
+        } else if (dir == 7) {
+            //if 7, bot goes diaL up
+            botMove('minus', num+1, getBots[i]);
+        } else if (dir == 8) {
+            //if 8, bot goes diaL down
+            botMove('add', num+1, getBots[i]);
+        }
+        
+    }
 }
 
 
-function moveFollow (target, botPosition, getBots, i) {
-    if(checkBeside(target, botPosition)) {
+//for the bots to follow the player
+function moveFollowEasy (playPosition, target, botPosition, getBots, i) {
+    if(checkBeside(playPosition, botPosition)) {
         //bot is directly beside the player, damages the player at each interval
         hp -= 40;
     } else if(target > botPosition) {
@@ -234,8 +291,8 @@ function moveFollow (target, botPosition, getBots, i) {
 
 //check for bots within a certain radius from the player
 function checkRadius (playPosition) {
-    var rad = 2;
-    idInRadius = [];
+    var rad = 15;
+    var idInRadius = [];
 
     if (playPosition == 1) {
         //when the player is in the top left corner of the bigBox
@@ -381,11 +438,29 @@ function checkRadius (playPosition) {
             }
         }
     }
+    // console.log('radius: ' + idInRadius);
+    return idInRadius;
     
-
-    console.log('radius: ' + idInRadius);
-    debugger;
+    // debugger;
 }
+
+
+
+
+
+function checkBotInRadius (playPosition, currentBotElement) {
+    var checking = false;
+    var idInRadius = checkRadius(playPosition);
+    
+    for(var a=0; a < idInRadius.length; a++) {
+        if(idInRadius[a] == currentBotElement) {
+            checking = true;
+        }
+    }
+    return checking;
+}
+
+
 
 
 
@@ -411,32 +486,39 @@ function botCheck () {
     previousPlay = playPosition;
     
     
-    var getBots = document.getElementsByClassName('bot');
+    var botElements = document.getElementsByClassName('bot');
 
-    for(var i=0; i<getBots.length; i++) {
+    for(var i=0; i<botElements.length; i++) {
         //get the bot position
-        if(getBots[i].parentNode.id != null) {
-            botPosition = parseInt(getBots[i].parentNode.id);
+        if(botElements[i].parentNode.id != null) {
+            currentBotElement = parseInt(botElements[i].parentNode.id);
 
-            if(bots[getBots[i].id] <= 0) {
+            console.log('botElements: '+ botElements)
+            if(bots[botElements[i].id] <= 0) {
                 //check if hp is <= 0 and delete bot if so
-                var botBox = getBots[i].parentNode;
-                botBox.removeChild(getBots[i]);
+                var botBox = botElements[i].parentNode;
+                botBox.removeChild(botElements[i]);
                 botBox.classList.remove('botBox');
             }
 
-            checkRadius(playPosition);
-
-            if (true) {
-                moveFollow (target, botPosition, getBots, i);
+            console.log('currentBotElement: ' + currentBotElement);
+            if (checkBotInRadius(playPosition, currentBotElement)) {
+                moveFollowEasy(playPosition, target, currentBotElement, botElements, i);
             } else {
-                moveRandom(botPosition, getBots, i);
+                moveRandom(playPosition, currentBotElement, botElements, i);
             }
             
         }
     }
 
 }
+
+
+
+
+
+
+
 
 function createBot (i) {
     //creating the div for bot
@@ -473,7 +555,7 @@ function levelOne () {
 
         i += 1;
 
-        if (i >= 8) {
+        if (i >= 20) {
             clearInterval(x);
         };
     },500);
