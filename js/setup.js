@@ -1,11 +1,10 @@
-function createWalls () {
-    
+//record the name
+function nameRecord () {
+    name = document.getElementById('name').value;
+    console.log(name);
 }
 
-
-function setup () {
-    nameRecord();
-
+function buildingGrid () {
     bigBox = document.createElement('div');
     bigBox.classList.add('bigBox');
 
@@ -27,20 +26,27 @@ function setup () {
     var input = document.getElementById('name');
     var welcome = document.getElementById('welcome');
     var start = document.getElementsByClassName('button');
+    var insertName = document.getElementsByClassName('insertName');
     input.parentNode.removeChild(input);
     welcome.parentNode.removeChild(welcome);
     start[0].parentNode.removeChild(start[0]);
+    insertName[0].parentNode.removeChild(insertName[0]);
 
     //building the text above bigBox
-    // var text = document.createElement('h1');
-    // text.innerText = "Player 1's turn!";
-    // container[0].appendChild(text);
+    var text = document.createElement('h1');
+    text.innerText = " ";
+    container[0].appendChild(text);
     container[0].appendChild(bigBox);
+}
 
-    //creating walls
-    createWalls();
 
-    //adding player to grid
+function createWalls () {
+    
+}
+
+
+
+function addingPlayer () {
     player = document.createElement('div');
     player.id = 'player';
     var playerBox = document.getElementById(num*num/2);
@@ -48,6 +54,59 @@ function setup () {
     playerBox.classList.add('playerBox');
     //rotating the player image
     playerBox.style.transform = "rotate(270deg)";
+}
+
+
+
+function buildRight() {
+    //build Name + Stats
+    var nameBox = document.getElementsByClassName('name');
+    var nameStats = document.createElement('h1');
+    console.log(name);
+    nameStats.innerText = name + "'s Stats";
+    nameBox[0].appendChild(nameStats);
+
+    //display HP
+        //text for HP
+        var myHealth = 
+        
+        //creating progress bar
+        var myProgress =  document.createElement('div');
+        var myBar = document.createElement('div');
+        myProgress.id = 'myHealth';
+        myBar.id = 'myBar';
+        myProgress.appendChild(myBar);
+        health[0].appendChild(myProgress);
+
+    
+
+    //build Weapons
+    
+    var pistolStats = document.createElement('div');
+    
+
+    //Bots Left
+    var botsLeft = document.getElementsByClassName('botsLeft');
+}
+
+
+
+
+function setup () {
+    nameRecord();
+
+    //build the grid and remove the stuff inside
+    buildingGrid();
+    
+    //adding the level to the bottom
+    var level = document.getElementById('level');
+    level.innerText = 'Level One';
+
+    //creating walls
+    createWalls();
+
+    //adding player to grid 
+    addingPlayer();
 
     //listen for keydown strokes
     document.addEventListener('keydown', move);
@@ -57,13 +116,11 @@ function setup () {
 
     //checking for Win Loss Situation
     var int = setInterval(function () {checkWinLoss(int)}, 1000);
+
+    //build right side DOM
+    buildRight();
 }
 
-//record the name
-function nameRecord () {
-    name = document.getElementById('name').value;
-    console.log(name);
-}
 
 function everything () {
     var start = document.getElementsByClassName('button');

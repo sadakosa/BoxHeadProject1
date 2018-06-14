@@ -1,6 +1,13 @@
 var container = document.getElementsByClassName('container');
+//for the right side of the page
+var right = document.getElementsByClassName('right');
+var nameBox = document.getElementsByClassName('name');
+var health = document.getElementsByClassName('hp');
+var weaponsStats = document.getElementsByClassName('weapons');
+var botsLeft = document.getElementsByClassName('botsLeft');
+//general
 var name;
-var num = 36;
+var num = 30;
 var player;
 var playerWeapon = 'pistol';
 var direction = 'left';
@@ -23,7 +30,7 @@ function changeImageDir(entity, dir, node) {
         if(dir == 'right' || dir == 'left') {
             bulletBox.style.transform = "rotate(90deg)";
         } else {
-            bulletBox.style.transform = 'rotate(180deg)';
+            bulletBox.style.transform = 'rotate(0deg)';
         }
     }
     
@@ -38,6 +45,7 @@ function moveUp () {
     var newBox = document.getElementById((playerId - num).toString())
 
     if(playerId > num && newBox.childNodes.length<1) {
+        changeImageDir('player', 'up');
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
@@ -58,6 +66,7 @@ function moveDown () {
     var newBox = document.getElementById((playerId + num).toString())
 
     if(playerId <= (num*num)-num && newBox.childNodes.length<1) {
+        changeImageDir('player', 'up');
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
@@ -77,6 +86,7 @@ function moveLeft () {
     var newBox = document.getElementById((playerId - 1).toString())
 
     if((playerId-1)%num != 0 && newBox.childNodes.length<1) {
+        changeImageDir('player', 'up');
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
@@ -96,6 +106,7 @@ function moveRight () {
     var newBox = document.getElementById((playerId + 1).toString())
 
     if(playerId%num != 0 && newBox.childNodes.length<1) {
+        changeImageDir('player', 'up');
         playerBox.removeChild(player);
         playerBox.classList.remove('playerBox');
 
@@ -103,6 +114,7 @@ function moveRight () {
         newBox.appendChild(player);
 
         changeImageDir('player', 'right');
+        
         direction = 'right';
     }
 }

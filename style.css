@@ -2,14 +2,63 @@ body {
     font-family: sans-serif;
 }
 
-.container {
+.whole {
     position: relative;
-    top: 50px;
-    width: 800px;
+    width: 80%;
     margin: 0 auto;
+    height: 97vh;
+    border: 1px solid black;
+    /* display: inline-block; */
+}
+
+.gameName {
+    border: 1px solid black;
+    height: 7%;
+}
+
+.gameBox {
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+    height: 93%;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.container {
+    border: 1px solid black;
+    height: 90%;
+}
+
+.level {
+    border: 1px solid black;
+    height: 10%;
+}
+
+
+.right {
+    border: 1px solid black;
+    width: 29%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.insertName {
+    width: 100%;
+    /* border: 1px solid black; */
+    margin: 40vh auto 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.text {
+    height: 30px;
 }
 
 .bigBox {
+    /* margin: 15vh auto 0 auto; */
     width: 700px;
     height: 700px;
     border: 1px solid black;
@@ -25,11 +74,21 @@ body {
 }
 
 #name {
-    left: 100px;
+    left: 38%;
     position: absolute;
     height: 30px;
     width: 200px;
     display: block;
+    margin: 0 auto;
+}
+
+#select {
+    left: 46%;
+    /* position: absolute; */
+    display: block;
+    top: 20px;
+    position: relative;
+    padding: 10px;
 }
 
 .button {
@@ -42,7 +101,7 @@ body {
     color: white;
     width: 100px;
     height: 20px;
-    left: 150px;
+    left: 43%;
     top: 30px;
     /* margin: 0 auto; */
 }
@@ -59,7 +118,8 @@ body {
 
 .botBox {
     /* background-color: grey; */
-    background-image: url('img/zombies.png');
+    /* background-image: url('img/zombies.png'); */
+    background-image: url('img/cuteSkullBlack.png');
     background-size: contain;
 }
 
@@ -68,3 +128,14 @@ body {
     background-image: url('img/gunB.png');
     background-size: contain;
 }
+
+#myHealth {
+    width: 100%;
+    background-color: #ddd;
+  }
+  
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: #4CAF50;
+  }

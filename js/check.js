@@ -13,3 +13,7 @@ function checkWinLoss (int) {
         clearInterval(int);
     }
 }
+
+function checkStats () {
+    
+}

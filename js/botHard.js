@@ -11,6 +11,7 @@ function botMove(dir, nMove, bot) {
         var botPosition = parseInt(bot.parentNode.id);
         
         if(dir == 'add') {
+            console.log(botPosition, nMove, botPosition+nMove);
             var newBox = document.getElementById((botPosition+nMove).toString());
             
             if(newBox.childNodes.length<1) {
@@ -21,6 +22,7 @@ function botMove(dir, nMove, bot) {
                 newBox.appendChild(bot);
             }
         } else if (dir == 'minus') {
+            console.log(botPosition, nMove, botPosition-nMove);
             var newBox = document.getElementById((botPosition-nMove).toString());
             
             if(newBox.childNodes.length<1) {
@@ -98,18 +100,27 @@ function determine (previous, current, up, down, left, right, newCurrent, defaul
         if (current <= (Math.floor(previous/num)+checkNumCol(previous))*num) {
             //same row, current is to the right of the previous
             right ++;
+            console.log('moved right', right, current, previous);
             currentMove('left', previous, current, up, down, left, right, newCurrent, defaultCurrent);
         } else {
             down ++;
+            console.log('moved down', down, current, previous);
             currentMove('up', previous, current, up, down, left, right, newCurrent, defaultCurrent);
         }
     } else if (current < previous)  {
+        // console.log("current: " + current);
+        // console.log("previous: " + previous);
+        // console.log("Num: " + num);
+        // console.log("first check: " + (Math.floor(current/num)));
+        // console.log("column number = " + checkNumCol(current));
         if (previous <= (Math.floor(current/num)+checkNumCol(current))*num) {
             //same row, current is to the left of the previous
             left ++;
+            console.log('moved left', left, current, previous);
             currentMove('right', previous, current, up, down, left, right, newCurrent, defaultCurrent);
         } else {
             up ++;
+            console.log('moved up', up, current, previous);
             currentMove('down', previous, current, up, down, left, right, newCurrent, defaultCurrent);
         }
     } else if (current == previous) {
@@ -273,6 +284,60 @@ function moveFollowEasy (playPosition, target, botPosition, getBots, i) {
         }
     }
 }
+
+
+
+
+
+
+//for the bots to follow the player
+function moveFollowHard (playPosition, target, botPosition, getBots, i) {
+    //setting actual target
+    
+
+    if(checkBeside(playPosition, botPosition)) {
+        //bot is directly beside the player, damages the player at each interval
+        hp -= 40;
+    } else if(target > botPosition) {
+
+        if (target < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
+            //same row, player is to the right of the bot
+            botMove('add', 1, getBots[i]);
+        } else {
+            //player is below bot
+            if((target-botPosition)%num ==0) {
+                //player is vertically below bot
+                botMove('add', num, getBots[i]);
+            } else if (checkEntityCol(target) > checkEntityCol(botPosition)) {
+                //player is diagonally right below bot --> \ diagonally right
+                botMove('add', num+1, getBots[i]);
+            } else if (checkEntityCol(target) < checkEntityCol(botPosition)) {
+                //player is diagonally left below bot --> \ diagonally left
+                botMove('add', num-1, getBots[i]);
+            }
+        }
+
+    } else if (target < botPosition) {
+
+        if (botPosition < Math.floor(target/num)+checkNumCol(target)) {
+            //same row, player is to the left of the bot
+            botMove('minus', 1, getBots[i]);
+        } else {
+            //player is above bot
+            if((botPosition-target)%num ==0) {
+                //player is vertically above bot
+                botMove('minus', num, getBots[i]);
+            } else if (checkEntityCol(target) > checkEntityCol(botPosition)) {
+                //player is diagonally left above bot --> / diagonally left
+                botMove('minus', num-1, getBots[i]);
+            } else if (checkEntityCol(target) < checkEntityCol(botPosition)) {
+                //player is diagonally right above bot --> \ diagonally right
+                botMove('minus',  num+1, getBots[i]);
+            }
+        }
+    }
+}
+
 
 
 
@@ -462,7 +527,9 @@ function botCheck () {
 
     //predict where the player will be based on how much the player has moved
     if (previousPlay != null) {
+        console.log("bot check")
         predictPlay(previousPlay, playPosition);
+        console.log('predicted id: ' + target)
     } else {
         target = playPosition;
     }
@@ -478,6 +545,7 @@ function botCheck () {
         if(botElements[i].parentNode.id != null) {
             currentBotElement = parseInt(botElements[i].parentNode.id);
 
+            console.log('botElements: '+ botElements)
             if(bots[botElements[i].id] <= 0) {
                 //check if hp is <= 0 and delete bot if so
                 var botBox = botElements[i].parentNode;
@@ -485,6 +553,7 @@ function botCheck () {
                 botBox.classList.remove('botBox');
             }
 
+            console.log('currentBotElement: ' + currentBotElement);
             if (checkBotInRadius(playPosition, currentBotElement)) {
                 moveFollowEasy(playPosition, target, currentBotElement, botElements, i);
             } else {
@@ -514,6 +583,7 @@ function createBot (i) {
     // var x = (Math.floor(Math.random() * num * num) + 1).toString()
     
     var x = (Math.floor(Math.random() * 3) + 1)
+    console.log(x);
     var y;
     if(x  ==  1) {
         y = '541';
@@ -522,25 +592,29 @@ function createBot (i) {
     } else if (x == 3) {
         y = '18';
     }
+    console.log(y);  
     var botBox = document.getElementById(y);
+    console.log(botBox);
     botBox.appendChild(bot);
     botBox.classList.add("botBox");
 
 }
 
-function levelOne () {
+function levelTwo () {
     var i = 1;
     var x = setInterval(function() {
         createBot(i);
 
         i += 1;
 
-        if (i >= 1) {
+        if (i >= 20) {
             clearInterval(x);
         };
     },500);
 
     botCheckInt = setInterval(botCheck, 500);
+    console.log(Object.keys(bots));
+    console.log(Object.values(bots));
     
 }
 
