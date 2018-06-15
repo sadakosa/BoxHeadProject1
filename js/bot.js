@@ -591,7 +591,7 @@ function levelOne () {
 
         i += 1;
 
-        if (i >= 5) {
+        if (i >= 0) {
             clearInterval(x);
         };
     },500);

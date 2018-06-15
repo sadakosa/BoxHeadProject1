@@ -32,6 +32,10 @@ function changeImageDir(entity, dir, node) {
         var bulletBox = node.parentNode;
         if(dir == 'right' || dir == 'left') {
             bulletBox.style.transform = "rotate(90deg)";
+        } else if (dir == 'diaL') {
+            bulletBox.style.transform = "rotate(135deg)";
+        } else if (dir == 'diaR') {
+            bulletBox.style.transform = "rotate(45deg)";
         } else {
             bulletBox.style.transform = 'rotate(0deg)';
         }
