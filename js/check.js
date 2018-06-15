@@ -12,7 +12,6 @@ function checkWinLoss (int) {
 
     //updating the hp stats on the right
     var myHealth = document.getElementById('hp');
-    console.log('myHealth: ' + myHealth.innerText);
     myHealth.innerText = 'HP: ' + hp + " / 1000";
 
     updateProgressBar();

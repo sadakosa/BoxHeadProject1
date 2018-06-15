@@ -13,7 +13,6 @@ function buildingGrid () {
         smallBox.classList.add('smallBox');
         smallBox.id = i;
         var boxSize = (700-num*2) / num;
-        console.log(boxSize)
 
         smallBox.style.width = boxSize +'px';
         smallBox.style.height = boxSize + 'px'; 

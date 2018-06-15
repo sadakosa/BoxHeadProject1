@@ -1,6 +1,5 @@
 //check identity of div
 function checkIdentity (entity) {
-    console.log(entity.classList);
     if (entity.id == 'player') {
         return 'player';
     }
@@ -14,9 +13,6 @@ function checkIdentity (entity) {
 
 //subsequent movement of a bullet
 function bulletCheckMove (dir, bullet, int)  {
-    console.log('bulletCheckMove');
-    console.log('bulletid: ' + bullet.parentNode.id);
-    console.log('dir: ' + dir);
     var bulletBox = bullet.parentNode;
     if( bulletBox === null ){
         debugger;
@@ -74,7 +70,6 @@ function bulletCheckMove (dir, bullet, int)  {
             newBox.classList.add('bulletBox');
             changeImageDir('bullet', 'right', bullet);
         } else {
-            console.log('removing midBullet');
             //remove from old box
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -128,7 +123,6 @@ function bulletCheckMove (dir, bullet, int)  {
             newBox.classList.add('bulletBox');
             changeImageDir('bullet', 'diaR', bullet);
         } else {
-            console.log('removing topBullet');
             //fixing the box
             changeImageDir('bullet', 'up', bullet);
             //remove from old box
@@ -382,7 +376,6 @@ function shotgunCheckDirectionAndFire () {
     bulletBox.appendChild(bullet);
     bulletBox.classList.add('bulletBox');
     changeImageDir('bullet', 'diaR', bullet);
-    console.log('bullet: ' + bullet.parentNode.id);
     var intTop = setInterval(function () {bulletCheckMove('diaRDown', bullet, intTop)}, 20);
 }
 
@@ -409,7 +402,6 @@ function fireShotgun () {
                     bulletBox.appendChild(bullet);
                     bulletBox.classList.add('bulletBox');
                     changeImageDir('bullet', 'diaR', bullet);
-                    console.log('bullet: ' + bullet.parentNode.id);
                     var intTop = setInterval(function () {bulletCheckMove('diaRDown', bullet, intTop)}, 20);
                 }
             } else if (direction == 'right') {
@@ -450,7 +442,6 @@ function fireShotgun () {
                     bulletBox.appendChild(midBullet);
                     bulletBox.classList.add('bulletBox');
                     changeImageDir('bullet', 'left', midBullet);
-                    console.log('midBullet: ' + midBullet.parentNode.id);
                     var intMid = setInterval(function () {bulletCheckMove('left', midBullet, intMid)}, 20);
                 }
             } else if (direction == 'right') {
@@ -634,9 +625,6 @@ function initGrenadeExplosion (grenade) {
             }
         }
     }
-    console.log('grenadeId: ' + grenadeId);
-    console.log('idInRadius1: ' + idInRadius1);
-    console.log('idInRadius2: ' + idInRadius2);
     //now, idInRadius1 has only elements that are 1 distance away from the grenade
     //now, idInRadius2 has only elements that are 2 distance away from the grenade
     

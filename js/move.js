@@ -128,7 +128,6 @@ function moveRight () {
 var playerBoxPause;
 //pause function
 function pause () {
-    console.log('pausing')
     if(checkPause) {
         //make bots move
         botCheckInt = setInterval(botCheck, 500);

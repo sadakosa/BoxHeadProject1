@@ -3,7 +3,7 @@ var botCheckInt;
 var previousPlay;
 var counter = 0;
 var target;
-var botsWanted = 1;
+var botsWanted = 2;
 // var idInRadius = [];
 
 function botsLeftNumber () {
