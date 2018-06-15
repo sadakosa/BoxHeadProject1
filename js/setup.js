@@ -58,21 +58,7 @@ function addingPlayer () {
 
 
 
-function buildRight() {
-    //build Name + Stats
-    var nameBox = document.getElementsByClassName('name');
-    var nameStats = document.createElement('h1');
-
-    if(name != '') {
-        nameStats.innerText = name + "'s Stats";
-        nameBox[0].appendChild(nameStats);
-    } else {
-        nameStats.innerText = "anything";
-        nameStats.style.color = 'white';
-        nameBox[0].appendChild(nameStats);
-    }
-    
-
+function buildBottom () {
     //display HP
         //text for HP
         var myHealth = document.createElement('h3');
@@ -88,6 +74,25 @@ function buildRight() {
         myProgress.appendChild(myBar);
         health.appendChild(myProgress);
 
+    //adding the level to the bottom
+    var level = document.getElementById('level');
+    level.innerText = 'Level One';
+}
+
+function buildRight() {
+    //build Name + Stats
+    var nameBox = document.getElementsByClassName('name');
+    var nameStats = document.createElement('h1');
+
+    if(name != '') {
+        nameStats.innerText = name + "'s Stats";
+        nameBox[0].appendChild(nameStats);
+    } else {
+        nameStats.innerText = "anything";
+        nameStats.style.color = 'white';
+        nameBox[0].appendChild(nameStats);
+    }
+
     //build Weapons
         //text for weapons
         var weaponText = document.createElement('h3');
@@ -99,7 +104,7 @@ function buildRight() {
         var shotgunStats = document.createElement('div');
         var grenadeStats = document.createElement('div');
 
-        pistolStats.classList.add('weaponBox');
+        pistolStats.classList.add('weaponBoxChosen');
         if (noWeapons[1] != 0) {
             shotgunStats.classList.add('weaponBox');
         } else {
@@ -210,10 +215,6 @@ function setup () {
 
     //build the grid and remove the stuff inside
     buildingGrid();
-    
-    //adding the level to the bottom
-    var level = document.getElementById('level');
-    level.innerText = 'Level One';
 
     //creating walls
     createWalls();
@@ -230,8 +231,14 @@ function setup () {
     //checking for Win Loss Situation --> in check.js
     var int = setInterval(function () {checkWinLoss(int)}, 500);
 
+    //building the hp bar and level at the bottom
+    buildBottom();
+
     //build right side DOM
     buildRight();
+
+    //pause
+    pause();
 }
 
 

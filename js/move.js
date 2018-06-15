@@ -148,7 +148,7 @@ function pause () {
         //create text for pause
         var text = document.getElementsByClassName('text')[0].childNodes[0];
         text.style.color = 'black';
-        text.innerText = 'PAUSED';
+        text.innerText = "PAUSED, press 'p' to continue";
 
         checkPause = true;
     }

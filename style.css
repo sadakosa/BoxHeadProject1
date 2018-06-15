@@ -1,5 +1,6 @@
 body {
     font-family: sans-serif;
+    margin: 0px;
 }
 
 .whole {
@@ -23,17 +24,41 @@ body {
     height: 92.5%;
     border: 1px solid black;
     display: inline-block;
+    left: 10px;
 }
 
 .container {
     /* border: 1px solid black; */
-    height: 90%;
+    height: 80%;   
 }
 
 .level {
     /* border: 1px solid black; */
-    height: 10%;
+    height: 20%;
+    vertical-align: top;
+    position: relative;
+    margin: 0px;
 }
+
+.hp {
+    position: relative;
+    top: 30px;
+    text-align: center;
+}
+#myHealth {
+    width: 70%;
+    background-color: #ddd;
+    margin: 0 auto;
+    position: relative;
+    bottom: 12px;
+  }
+  
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: #4CAF50;
+  }
+
 
 
 .right {
@@ -41,6 +66,8 @@ body {
     width: 29%;
     display: inline-block;
     vertical-align: top;
+    position: relative;
+    left: 10px;
 }
 
 .insertName {
@@ -133,20 +160,22 @@ h1 {
     background-size: contain;
 }
 
-#myHealth {
-    width: 100%;
-    background-color: #ddd;
-  }
-  
-#myBar {
-    width: 1%;
-    height: 30px;
-    background-color: #4CAF50;
-  }
 
 .weapons {
     position: relative;
     margin-top: 40px;
+}
+
+.weaponBoxChosen {
+    width: 99%;
+    height: 100px;
+    background-color: lightgreen;
+    color: green;
+    border: 1px solid grey;
+    margin: 10px auto;
+    position: relative;
+    top: 10px;
+    border-radius: 10px;
 }
 
 .weaponBox {
@@ -176,6 +205,7 @@ h1 {
 .botsLeft {
     position: relative;
     margin-top: 40px;
+    color: red;
 }
 
 .controls {

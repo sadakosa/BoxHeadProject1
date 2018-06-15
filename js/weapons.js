@@ -38,25 +38,59 @@ var weapons = {
     }
 }
 
+//change weapon colour
+function changeWeaponColour (playerWeapon, newPlayerWeapon) {
+    var numberOld = 0;
+    var numberNew = 0;
+
+    //for previous weapon
+    if(playerWeapon == 'pistol') {
+        numberOld = 2;
+    } else if (playerWeapon == 'shotgun') {
+        numberOld = 3;
+    } else if (playerWeapon == 'grenade') {
+        numberOld = 4;
+    }
+
+    //for new weapon
+    if(newPlayerWeapon == 'pistol') {
+        numberNew = 2;
+    } else if (newPlayerWeapon == 'shotgun') {
+        numberNew = 3;
+    } else if (newPlayerWeapon == 'grenade') {
+        numberNew = 4;
+    }
+
+    weaponsStats.childNodes[numberOld].classList.remove('weaponBoxChosen');
+    weaponsStats.childNodes[numberOld].classList.add('weaponBox');
+    weaponsStats.childNodes[numberNew].classList.remove('weaponBox');
+    weaponsStats.childNodes[numberNew].classList.add('weaponBoxChosen');
+}
+
+
 //to change the weapons.
 function changeWeapons (key) {
     if (key == weapons.pistol.keyCode) {
+        changeWeaponColour(playerWeapon, 'pistol');
         playerWeapon = 'pistol';
     } else if (key == weapons.shotgun.keyCode) {
         if(noWeapons[1] > 0) {
+            changeWeaponColour(playerWeapon, 'shotgun');
             playerWeapon = 'shotgun';
         }
     } else if (key == weapons.grenade.keyCode) {
         if (noWeapons[2] > 0) {
+            changeWeaponColour(playerWeapon, 'grenade');
             playerWeapon = 'grenade';
         }
-    } else if (key == weapons.mine.keyCode) {
-        if (noWeapons[3] > 0) {
-            playerWeapon = 'mine';
-        }
-    } else if (key == weapons.barrel.keyCode) {
-        if (noWeapons[4] > 0) {
-            playerWeapon = 'barrel';
-        }
-    }
+    } 
+    // else if (key == weapons.mine.keyCode) {
+    //     if (noWeapons[3] > 0) {
+    //         playerWeapon = 'mine';
+    //     }
+    // } else if (key == weapons.barrel.keyCode) {
+    //     if (noWeapons[4] > 0) {
+    //         playerWeapon = 'barrel';
+    //     }
+    // }
 }  

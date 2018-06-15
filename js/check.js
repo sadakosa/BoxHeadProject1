@@ -30,6 +30,15 @@ function checkWinLoss (int) {
         var text = document.getElementsByClassName('text')[0].childNodes[0];
         text.style.color = 'red';
         text.innerText = 'YOU LOST!';
+        setTimeout(function () {
+            text.style.color = 'red';
+        }, 1000);
+        setTimeout(function () {
+            text.style.color = 'red';
+        }, 1500);
+        setTimeout(function () {
+            text.style.color = 'red';
+        }, 2000);
 
         //remove player
         var playerBox = player.parentNode;

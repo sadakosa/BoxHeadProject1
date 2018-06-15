@@ -120,60 +120,173 @@ function bulletCheckMove (dir, bullet, int)  {
 }
 
 
+
+function firePistol () {
+    //fire pistol
+    var bullet = document.createElement('div');
+    bullet.classList.add('bullet');
+    var playerBox = player.parentNode;
+    var playerId = parseInt(playerBox.id);
+    
+    if (direction == 'left') {
+        if((playerId - 1)%num != 0) {
+            var bulletBox = document.getElementById((playerId - 1).toString())
+            bulletBox.appendChild(bullet);
+            bulletBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'left', bullet);
+            var int = setInterval(function () {bulletCheckMove('left', bullet, int)}, 20);
+        }
+    } else if (direction == 'right') {
+        if(playerId%num != 0) {
+            var bulletBox = document.getElementById((playerId+1).toString())
+            bulletBox.appendChild(bullet);
+            bulletBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'right', bullet);
+            var int = setInterval(function () {bulletCheckMove('right', bullet, int)}, 20);
+        }
+    } else if (direction == 'up') {
+        if(playerId > num) {
+            var bulletBox = document.getElementById((playerId-num).toString())
+            bulletBox.appendChild(bullet);
+            bulletBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'up', bullet);
+            var int = setInterval(function() {bulletCheckMove('up', bullet, int)}, 20);
+        }
+    } else if (direction == 'down') {
+        if(playerId <= (num*num)-num) {
+            var bulletBox = document.getElementById((playerId+num).toString())
+            bulletBox.appendChild(bullet);
+            bulletBox.classList.add('bulletBox');
+            changeImageDir('bullet', 'up', bullet);
+            var int = setInterval(function () {bulletCheckMove('down', bullet, int)}, 20);
+        }
+    }
+}
+
+
+
+
+
+function fireShotgun () {
+    //fire shotgun
+    for(var i=0; i<3; i++) {
+        if(i == 0) {
+            //top diagonal
+            // var bullet = document.createElement('div');
+            // bullet.classList.add('bullet');
+            // var playerBox = player.parentNode;
+            // var playerId = parseInt(playerBox.id);
+            
+            // if (direction == 'left') {
+            //     if((playerId - 1)%num != 0) {
+            //         var bulletBox = document.getElementById((playerId - 1).toString())
+            //         bulletBox.appendChild(bullet);
+            //         bulletBox.classList.add('bulletBox');
+            //         changeImageDir('bullet', 'left', bullet);
+            //         var int = setInterval(function () {bulletCheckMove('left', bullet, int)}, 20);
+            //     }
+            // } else if (direction == 'right') {
+            //     if(playerId%num != 0) {
+            //         var bulletBox = document.getElementById((playerId+1).toString())
+            //         bulletBox.appendChild(bullet);
+            //         bulletBox.classList.add('bulletBox');
+            //         changeImageDir('bullet', 'right', bullet);
+            //         var int = setInterval(function () {bulletCheckMove('right', bullet, int)}, 20);
+            //     }
+            // } else if (direction == 'up') {
+            //     if(playerId > num) {
+            //         var bulletBox = document.getElementById((playerId-num).toString())
+            //         bulletBox.appendChild(bullet);
+            //         bulletBox.classList.add('bulletBox');
+            //         changeImageDir('bullet', 'up', bullet);
+            //         var int = setInterval(function() {bulletCheckMove('up', bullet, int)}, 20);
+            //     }
+            // } else if (direction == 'down') {
+            //     if(playerId <= (num*num)-num) {
+            //         var bulletBox = document.getElementById((playerId+num).toString())
+            //         bulletBox.appendChild(bullet);
+            //         bulletBox.classList.add('bulletBox');
+            //         changeImageDir('bullet', 'up', bullet);
+            //         var int = setInterval(function () {bulletCheckMove('down', bullet, int)}, 20);
+            //     }
+            // }
+
+        } else if (i == 1) {
+            // middle bullet
+            var bullet = document.createElement('div');
+            bullet.classList.add('bullet');
+            var playerBox = player.parentNode;
+            var playerId = parseInt(playerBox.id);
+            
+            if (direction == 'left') {
+                if((playerId - 1)%num != 0) {
+                    var bulletBox = document.getElementById((playerId - 1).toString())
+                    bulletBox.appendChild(bullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'left', bullet);
+                    var int = setInterval(function () {bulletCheckMove('left', bullet, int)}, 20);
+                }
+            } else if (direction == 'right') {
+                if(playerId%num != 0) {
+                    var bulletBox = document.getElementById((playerId+1).toString())
+                    bulletBox.appendChild(bullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'right', bullet);
+                    var int = setInterval(function () {bulletCheckMove('right', bullet, int)}, 20);
+                }
+            } else if (direction == 'up') {
+                if(playerId > num) {
+                    var bulletBox = document.getElementById((playerId-num).toString())
+                    bulletBox.appendChild(bullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'up', bullet);
+                    var int = setInterval(function() {bulletCheckMove('up', bullet, int)}, 20);
+                }
+            } else if (direction == 'down') {
+                if(playerId <= (num*num)-num) {
+                    var bulletBox = document.getElementById((playerId+num).toString())
+                    bulletBox.appendChild(bullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'up', bullet);
+                    var int = setInterval(function () {bulletCheckMove('down', bullet, int)}, 20);
+                }
+            }
+        } else if (i == 2) {
+            //bottom diagonal
+
+        }
+    }
+}
+
+
+
+
+function fireGrenade () {
+    //fire grenade
+
+}
+
+
+
+
+
 //fire motion
 function fire () {
     if(playerWeapon == 'pistol') {
         //fire pistol
-        var bullet = document.createElement('div');
-        bullet.classList.add('bullet');
-        var playerBox = player.parentNode;
-        var playerId = parseInt(playerBox.id);
-        
-        if (direction == 'left') {
-            if((playerId - 1)%num != 0) {
-                var bulletBox = document.getElementById((playerId - 1).toString())
-                bulletBox.appendChild(bullet);
-                bulletBox.classList.add('bulletBox');
-                changeImageDir('bullet', 'left', bullet);
-                var int = setInterval(function () {bulletCheckMove('left', bullet, int)}, 20);
-            }
-        } else if (direction == 'right') {
-            if(playerId%num != 0) {
-                var bulletBox = document.getElementById((playerId+1).toString())
-                bulletBox.appendChild(bullet);
-                bulletBox.classList.add('bulletBox');
-                changeImageDir('bullet', 'right', bullet);
-                var int = setInterval(function () {bulletCheckMove('right', bullet, int)}, 20);
-            }
-        } else if (direction == 'up') {
-            if(playerId > num) {
-                var bulletBox = document.getElementById((playerId-num).toString())
-                bulletBox.appendChild(bullet);
-                bulletBox.classList.add('bulletBox');
-                changeImageDir('bullet', 'up', bullet);
-                var int = setInterval(function() {bulletCheckMove('up', bullet, int)}, 20);
-            }
-        } else if (direction == 'down') {
-            if(playerId <= (num*num)-num) {
-                var bulletBox = document.getElementById((playerId+num).toString())
-                bulletBox.appendChild(bullet);
-                bulletBox.classList.add('bulletBox');
-                changeImageDir('bullet', 'up', bullet);
-                var int = setInterval(function () {bulletCheckMove('down', bullet, int)}, 20);
-            }
-        }
-
+        firePistol();
     } else if (playerWeapon == 'shotgun') {
         //fire shotgun
-
+        fireShotgun();
     } else if (playerWeapon == 'grenade') {
         //fire grenade
-
-    } else if (playerWeapon == 'mine') {
-        //plant and fire mines
-
-    } else if (playerWeapon == 'barrel') {
-        //plant barrels
-
+        fireGrenade();
     }
+    // } else if (playerWeapon == 'mine') {
+    //     //plant and fire mines
+
+    // } else if (playerWeapon == 'barrel') {
+    //     //plant barrels
+
+    // }
 }

@@ -243,12 +243,53 @@ function moveRandom (playPosition, botPosition, getBots, i) {
     }
 }
 
-
+var timeoutText;
+var timeoutTextNew;
+var timeoutTextNewer;
+var checkTimeout;
 //for the bots to follow the player
 function moveFollowEasy (playPosition, target, botPosition, getBots, i) {
     if(checkBeside(playPosition, botPosition) || checkDiagonal(playPosition, botPosition)) {
-        //bot is directly beside the player, damages the player at each interval
-        hp -= 40;
+        if(hp>0) {
+            //bot is directly beside the player, damages the player at each interval
+            hp -= 40;
+            //display hit
+            //create text for pause
+            var text = document.getElementsByClassName('text')[0].childNodes[0];
+            text.style.color = 'red';
+
+            if(text.innerText == 'HIT!' && timeoutText != 'reHit') {
+                checkTimeout = 'reHit';
+                text.style.color = 'white';
+                clearTimeout(timeoutText);
+
+                timeoutTextNew = setTimeout(function() {
+                    text.style.color = 'red';
+                }, 1000);
+                timeoutTextNewer = setTimeout(function() {
+                    text.style.color = 'white';
+                    checkTimeout = '';
+                }, 2000);
+            } else if (text.innerText == 'HIT!' && timeoutText == 'reHit') {
+                text.style.color = 'white';
+                clearTimeout(timeoutText);
+                clearTimeout(timeoutTextNew);
+                clearTimeout(timeoutTextNewer);
+
+                timeoutTextNew = setTimeout(function() {
+                    text.style.color = 'red';
+                }, 1000);
+                timeoutTextNewer = setTimeout(function() {
+                    text.style.color = 'white';
+                    checkTimeout = '';
+                }, 2000);
+            } else {
+                text.innerText = 'HIT!';
+                timeoutText = setTimeout(function() {
+                    text.style.color = 'white';
+                }, 1000);
+            }
+        }
     } else if(target > botPosition) {
 
         if (target < Math.floor(botPosition/num)+checkNumCol(botPosition)) {
