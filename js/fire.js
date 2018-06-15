@@ -116,6 +116,8 @@ function bulletCheckMove (dir, bullet, int)  {
         }
     } else if (dir == 'diaRUp') {
         if(bulletId > num && bulletId%num != 0) { //check if bullet is not in top or right row
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -127,6 +129,8 @@ function bulletCheckMove (dir, bullet, int)  {
             changeImageDir('bullet', 'diaR', bullet);
         } else {
             console.log('removing topBullet');
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -134,6 +138,8 @@ function bulletCheckMove (dir, bullet, int)  {
         }
     } else if (dir == 'diaRDown') {
         if(bulletId <= num*num-num && (bulletId-1)%num != 0) { //check if bullet is not in bottom or left row
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -144,6 +150,8 @@ function bulletCheckMove (dir, bullet, int)  {
             newBox.classList.add('bulletBox');
             changeImageDir('bullet', 'diaR', bullet);
         } else {
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -151,6 +159,8 @@ function bulletCheckMove (dir, bullet, int)  {
         }
     } else if (dir == 'diaLUp') {
         if(bulletId > num && (bulletId-1)%num != 0) { //check if bullet is not in top or left row
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -161,6 +171,8 @@ function bulletCheckMove (dir, bullet, int)  {
             newBox.classList.add('bulletBox');
             changeImageDir('bullet', 'diaL', bullet);
         } else {
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -168,6 +180,8 @@ function bulletCheckMove (dir, bullet, int)  {
         }
     } else if (dir == 'diaLDown') {
         if(bulletId <= num*num-num && bulletId%num != 0) { //check if bullet is not in bottom or right row
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -178,6 +192,8 @@ function bulletCheckMove (dir, bullet, int)  {
             newBox.classList.add('bulletBox');
             changeImageDir('bullet', 'diaL', bullet);
         } else {
+            //fixing the box
+            changeImageDir('bullet', 'up', bullet);
             //remove from old box
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -361,6 +377,15 @@ var playerId = parseInt(playerBox.id);
 
 
 
+function shotgunCheckDirectionAndFire () {
+    var bulletBox = document.getElementById((playerId + (num-1)).toString())
+    bulletBox.appendChild(bullet);
+    bulletBox.classList.add('bulletBox');
+    changeImageDir('bullet', 'diaR', bullet);
+    console.log('bullet: ' + bullet.parentNode.id);
+    var intTop = setInterval(function () {bulletCheckMove('diaRDown', bullet, intTop)}, 20);
+}
+
 
 
 function fireShotgun () {
@@ -503,9 +528,12 @@ function fireShotgun () {
     //change the DOM
     var numberS = document.getElementById('numberS');
     numberS.innerText = 'available: ' + noWeapons[1];
+    
 
     if(noWeapons[1] == 0) {
         changeWeapons(49);
+        weaponsStats.childNodes[3].classList.remove('weaponBox');
+        weaponsStats.childNodes[3].classList.add('noWeaponBox');
     }
 }
 
@@ -779,9 +807,11 @@ function fireGrenade () {
     //change the DOM
     var numberG = document.getElementById('numberG');
     numberG.innerText = 'available: ' + noWeapons[2];
-
+    
     if(noWeapons[2] == 0) {
         changeWeapons(49);
+        weaponsStats.childNodes[4].classList.remove('weaponBox');
+        weaponsStats.childNodes[4].classList.add('noWeaponBox');
     }
 }
 

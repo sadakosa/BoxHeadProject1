@@ -8,7 +8,6 @@ var botsLeft = document.getElementsByClassName('botsLeft')[0];
 var controls = document.getElementsByClassName('controls')[0];
 //general
 var name;
-var botsLeftNumber = 20;
 var num = 30;
 var player;
 var playerWeapon = 'pistol';

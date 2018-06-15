@@ -5,6 +5,18 @@ var counter = 0;
 var target;
 // var idInRadius = [];
 
+function botsLeftNumber () {
+    var botsNum = 0;
+    var values = Object.values(bots);
+    for(var i=0; i<values; i++) {
+        if(values[i] > 0) {
+            botsNum++;
+        }
+    }
+
+    return botsNum;
+}
+
 function botMove(dir, nMove, bot) {
     if (bot.parentNode != null) {
         var botBox = bot.parentNode;
@@ -242,6 +254,10 @@ function moveRandom (playPosition, botPosition, getBots, i) {
         
     }
 }
+
+
+
+
 
 var timeoutText;
 var timeoutTextNew;
@@ -539,6 +555,9 @@ function botCheck () {
                 var botBox = botElements[i].parentNode;
                 botBox.removeChild(botElements[i]);
                 botBox.classList.remove('botBox');
+
+                //change DOM
+                botsLeft.childNodes[1].innerText = 'Bots left: ' + botsLeftNumber() + " / 20";
             }
 
             if (checkBotInRadius(playPosition, currentBotElement)) {
@@ -591,7 +610,7 @@ function levelOne () {
 
         i += 1;
 
-        if (i >= 18) {
+        if (i >= 1) {
             clearInterval(x);
         };
     },500);

@@ -79,6 +79,10 @@ function buildBottom () {
     level.innerText = 'Level One';
 }
 
+
+
+
+
 function buildRight() {
     //build Name + Stats
     var nameBox = document.getElementsByClassName('name');
@@ -92,6 +96,30 @@ function buildRight() {
         nameStats.style.color = 'white';
         nameBox[0].appendChild(nameStats);
     }
+
+     //Controls 
+     var controlsText = document.createElement('h3');
+     var controlDirection = document.createElement('p');
+     var controlFire = document.createElement('p');
+     var controlWeapons = document.createElement('p');
+     var controlPause = document.createElement('p');
+ 
+     controlsText.innerHTML = '<u>Controls:</u> ';
+     controlDirection.innerHTML = '- use the <b>up/down/left/right</b> arrows to move the shooter around';
+     controlFire.innerHTML = '- press + hold <b>spacebar</b> to shoot';
+     controlWeapons.innerHTML = '- <b>key 1</b> for gun, <b>key 2</b> for shotgun, <b>key 3</b> for grenade';
+     controlPause.innerHTML = '- <b>p/esc</b> to pause';
+ 
+     controls.appendChild(controlsText);
+     controls.appendChild(controlDirection);
+     controls.appendChild(controlFire);
+     controls.appendChild(controlWeapons);
+     controls.appendChild(controlPause);
+ 
+     //Bots Left
+     var botsLeftText = document.createElement('h3');
+     botsLeftText.innerText = 'Bots left: 18 / 18';
+     botsLeft.appendChild(botsLeftText);
 
     //build Weapons
         //text for weapons
@@ -183,30 +211,6 @@ function buildRight() {
         weaponsStats.appendChild(pistolStats);
         weaponsStats.appendChild(shotgunStats);
         weaponsStats.appendChild(grenadeStats);
-
-    //Bots Left
-    var botsLeftText = document.createElement('h3');
-    botsLeftText.innerText = 'Bots left: ' + botsLeftNumber + " / 20";
-    botsLeft.appendChild(botsLeftText);
-
-    //Controls 
-    var controlsText = document.createElement('h3');
-    var controlDirection = document.createElement('p');
-    var controlFire = document.createElement('p');
-    var controlWeapons = document.createElement('p');
-    var controlPause = document.createElement('p');
-
-    controlsText.innerHTML = '<u>Controls:</u> ';
-    controlDirection.innerHTML = '- use the <b>up/down/left/right</b> arrows to move the shooter around';
-    controlFire.innerHTML = '- press + hold <b>spacebar</b> to shoot';
-    controlWeapons.innerHTML = '- <b>key 1</b> for gun, <b>key 2</b> for shotgun, <b>key 3</b> for grenade';
-    controlPause.innerHTML = '- <b>p/esc</b> to pause';
-
-    controls.appendChild(controlsText);
-    controls.appendChild(controlDirection);
-    controls.appendChild(controlFire);
-    controls.appendChild(controlWeapons);
-    controls.appendChild(controlPause);
 }
 
 
