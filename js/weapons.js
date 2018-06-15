@@ -1,5 +1,5 @@
 
-var noWeapons = [1,10,3];
+var noWeapons = [1,20,3];
 
 var weapons = {
     'pistol': {
@@ -18,7 +18,7 @@ var weapons = {
 
     'grenade': {
         'name': 'grenade',
-        'damage': 300,
+        'damage': 1000,
         //press 3 for grenade
         'keyCode': 51
     }, 

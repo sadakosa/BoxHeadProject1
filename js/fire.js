@@ -15,6 +15,8 @@ function checkIdentity (entity) {
 //subsequent movement of a bullet
 function bulletCheckMove (dir, bullet, int)  {
     console.log('bulletCheckMove');
+    console.log('bulletid: ' + bullet.parentNode.id);
+    console.log('dir: ' + dir);
     var bulletBox = bullet.parentNode;
     if( bulletBox === null ){
         debugger;
@@ -72,6 +74,7 @@ function bulletCheckMove (dir, bullet, int)  {
             newBox.classList.add('bulletBox');
             changeImageDir('bullet', 'right', bullet);
         } else {
+            console.log('removing midBullet');
             //remove from old box
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -112,7 +115,7 @@ function bulletCheckMove (dir, bullet, int)  {
             clearInterval(int);
         }
     } else if (dir == 'diaRUp') {
-        if(bulletId > num && bulletId%num != 0) {
+        if(bulletId > num && bulletId%num != 0) { //check if bullet is not in top or right row
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -123,15 +126,14 @@ function bulletCheckMove (dir, bullet, int)  {
             newBox.classList.add('bulletBox');
             changeImageDir('bullet', 'diaR', bullet);
         } else {
+            console.log('removing topBullet');
             //remove from old box
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
             clearInterval(int);
         }
     } else if (dir == 'diaRDown') {
-        console.log('diaRDown');
-        if(bulletId <= num*num-num && (bulletId-1)%num != 0) {
-            console.log('diaRDown');
+        if(bulletId <= num*num-num && (bulletId-1)%num != 0) { //check if bullet is not in bottom or left row
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -148,7 +150,7 @@ function bulletCheckMove (dir, bullet, int)  {
             clearInterval(int);
         }
     } else if (dir == 'diaLUp') {
-        if(bulletId != num) {
+        if(bulletId > num && (bulletId-1)%num != 0) { //check if bullet is not in top or left row
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -165,7 +167,7 @@ function bulletCheckMove (dir, bullet, int)  {
             clearInterval(int);
         }
     } else if (dir == 'diaLDown') {
-        if(bulletId != num*num-num+1) {
+        if(bulletId <= num*num-num && bulletId%num != 0) { //check if bullet is not in bottom or right row
             //remove from old box 
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
@@ -360,6 +362,7 @@ var playerId = parseInt(playerBox.id);
 
 
 
+
 function fireShotgun () {
     var playerBox = player.parentNode;
     var playerId = parseInt(playerBox.id);
@@ -370,7 +373,6 @@ function fireShotgun () {
         
         if (i == 0) {
             //top diagonal
-            console.log('top Diagonal')
             var bullet = document.createElement('div');
             bullet.classList.add('bullet');
             var playerBox = player.parentNode;
@@ -378,13 +380,12 @@ function fireShotgun () {
             
             if (direction == 'left') {
                 if(topDia) {
-                    console.log('top Diagonal Left')
-                    console.log((playerId + (num-1)).toString());
                     var bulletBox = document.getElementById((playerId + (num-1)).toString())
                     bulletBox.appendChild(bullet);
                     bulletBox.classList.add('bulletBox');
                     changeImageDir('bullet', 'diaR', bullet);
-                    var int = setInterval(function () {bulletCheckMove('diaRDown', bullet, int)}, 20);
+                    console.log('bullet: ' + bullet.parentNode.id);
+                    var intTop = setInterval(function () {bulletCheckMove('diaRDown', bullet, intTop)}, 20);
                 }
             } else if (direction == 'right') {
                 if(topDia) {
@@ -392,7 +393,8 @@ function fireShotgun () {
                     bulletBox.appendChild(bullet);
                     bulletBox.classList.add('bulletBox');
                     changeImageDir('bullet', 'diaR', bullet);
-                    var int = setInterval(function () {bulletCheckMove('diaRUp', bullet, int)}, 20);
+                    bullet.id = 'topBullet';
+                    var intTop = setInterval(function () {bulletCheckMove('diaRUp', bullet, intTop)}, 20);
                 }
             } else if (direction == 'up') {
                 if(topDia) {
@@ -400,7 +402,7 @@ function fireShotgun () {
                     bulletBox.appendChild(bullet);
                     bulletBox.classList.add('bulletBox');
                     changeImageDir('bullet', 'diaL', bullet);
-                    var int = setInterval(function() {bulletCheckMove('diaLUp', bullet, int)}, 20);
+                    var intTop = setInterval(function() {bulletCheckMove('diaLUp', bullet, intTop)}, 20);
                 }
             } else if (direction == 'down') {
                 if(topDia) {
@@ -408,61 +410,379 @@ function fireShotgun () {
                     bulletBox.appendChild(bullet);
                     bulletBox.classList.add('bulletBox');
                     changeImageDir('bullet', 'diaL', bullet);
-                    var int = setInterval(function () {bulletCheckMove('diaLDown', bullet, int)}, 20);
+                    var intTop = setInterval(function () {bulletCheckMove('diaLDown', bullet, intTop)}, 20);
                 }
             }
 
         } else if (i == 1) {
             // middle bullet
-            // var bullet = document.createElement('div');
-            // bullet.classList.add('bullet');
+            var midBullet = document.createElement('div');
+            midBullet.classList.add('bullet');
             
-            // if (direction == 'left') {
-            //     if((playerId - 1)%num != 0) {
-            //         var bulletBox = document.getElementById((playerId - 1).toString())
-            //         bulletBox.appendChild(bullet);
-            //         bulletBox.classList.add('bulletBox');
-            //         changeImageDir('bullet', 'left', bullet);
-            //         var int = setInterval(function () {bulletCheckMove('left', bullet, int)}, 100);
-            //     }
-            // } else if (direction == 'right') {
-            //     if(playerId%num != 0) {
-            //         var bulletBox = document.getElementById((playerId+1).toString())
-            //         bulletBox.appendChild(bullet);
-            //         bulletBox.classList.add('bulletBox');
-            //         changeImageDir('bullet', 'right', bullet);
-            //         var int = setInterval(function () {bulletCheckMove('right', bullet, int)}, 20);
-            //     }
-            // } else if (direction == 'up') {
-            //     if(playerId > num) {
-            //         var bulletBox = document.getElementById((playerId-num).toString())
-            //         bulletBox.appendChild(bullet);
-            //         bulletBox.classList.add('bulletBox');
-            //         changeImageDir('bullet', 'up', bullet);
-            //         var int = setInterval(function() {bulletCheckMove('up', bullet, int)}, 20);
-            //     }
-            // } else if (direction == 'down') {
-            //     if(playerId <= (num*num)-num) {
-            //         var bulletBox = document.getElementById((playerId+num).toString())
-            //         bulletBox.appendChild(bullet);
-            //         bulletBox.classList.add('bulletBox');
-            //         changeImageDir('bullet', 'up', bullet);
-            //         var int = setInterval(function () {bulletCheckMove('down', bullet, int)}, 20);
-            //     }
-            // }
+            if (direction == 'left') {
+                if((playerId - 1)%num != 0) {
+                    var bulletBox = document.getElementById((playerId - 1).toString())
+                    bulletBox.appendChild(midBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'left', midBullet);
+                    console.log('midBullet: ' + midBullet.parentNode.id);
+                    var intMid = setInterval(function () {bulletCheckMove('left', midBullet, intMid)}, 20);
+                }
+            } else if (direction == 'right') {
+                if(playerId%num != 0) {
+                    var bulletBox = document.getElementById((playerId+1).toString())
+                    bulletBox.appendChild(midBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'right', midBullet);
+                    midBullet.id = 'midBullet';
+                    var intMid = setInterval(function () {bulletCheckMove('right', midBullet, intMid)}, 20);
+                }
+            } else if (direction == 'up') {
+                if(playerId > num) {
+                    var bulletBox = document.getElementById((playerId-num).toString())
+                    bulletBox.appendChild(midBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'up', midBullet);
+                    var intMid = setInterval(function() {bulletCheckMove('up', midBullet, intMid)}, 20);
+                }
+            } else if (direction == 'down') {
+                if(playerId <= (num*num)-num) {
+                    var bulletBox = document.getElementById((playerId+num).toString())
+                    bulletBox.appendChild(midBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'up', midBullet);
+                    var intMid = setInterval(function () {bulletCheckMove('down', midBullet, intMid)}, 20);
+                }
+            }
         } else if (i == 2) {
             //bottom diagonal
-
+            //top diagonal
+            var bottomBullet = document.createElement('div');
+            bottomBullet.classList.add('bullet');
+            var playerBox = player.parentNode;
+            var playerId = parseInt(playerBox.id);
+            
+            if (direction == 'left') {
+                if(bottomDia) {
+                    var bulletBox = document.getElementById((playerId - (num+1)).toString())
+                    bulletBox.appendChild(bottomBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'diaL', bottomBullet);
+                    var intBottom = setInterval(function () {bulletCheckMove('diaLUp', bottomBullet, intBottom)}, 20);
+                }
+            } else if (direction == 'right') {
+                if(bottomDia) {
+                    var bulletBox = document.getElementById((playerId + (num+1)).toString())
+                    bulletBox.appendChild(bottomBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'diaL', bottomBullet);
+                    var intBottom = setInterval(function () {bulletCheckMove('diaLDown', bottomBullet, intBottom)}, 20);
+                }
+            } else if (direction == 'up') {
+                if(bottomDia) {
+                    var bulletBox = document.getElementById((playerId - (num-1)).toString())
+                    bulletBox.appendChild(bottomBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'diaR', bottomBullet);
+                    var intBottom = setInterval(function() {bulletCheckMove('diaRUp', bottomBullet, intBottom)}, 20);
+                }
+            } else if (direction == 'down') {
+                if(bottomDia) {
+                    var bulletBox = document.getElementById((playerId + (num-1)).toString())
+                    bulletBox.appendChild(bottomBullet);
+                    bulletBox.classList.add('bulletBox');
+                    changeImageDir('bullet', 'diaR', bottomBullet);
+                    var intBottom = setInterval(function () {bulletCheckMove('diaRDown', bottomBullet, intBottom)}, 20);
+                }
+            }
         }
     }
+
+    noWeapons[1]--;
+
+    //change the DOM
+    var numberS = document.getElementById('numberS');
+    numberS.innerText = 'available: ' + noWeapons[1];
+
+    if(noWeapons[1] == 0) {
+        changeWeapons(49);
+    }
 }
+
+
+
+function grenadeExplode (grenade, grenadeBox, idInRadius1, idInRadius2, radius) {
+    if(radius == 0) {
+        //explode in grenadeBox
+        grenadeBox.style.backgroundColor = 'red';
+        var playerCheck = grenadeBox.querySelector('#player');
+        var botCheck = grenadeBox.querySelector('.bot');
+
+        if(playerCheck != null) {
+            hp = hp - weapons.grenade.damage;
+        } else if (botCheck != null) {
+            //damage to bot
+            var botId = botCheck.id;
+            bots[botId] = bots[botId] - weapons.grenade.damage;
+        }
+
+        setTimeout(function(){
+            grenadeBox.style.backgroundColor = 'white'
+        },300)
+    } else if (radius == 1) {
+        //explode in first ring around grenadeBox
+        for(var i=0; i<idInRadius1.length; i++) {
+            var box = document.getElementById(idInRadius1[i]);
+            box.style.backgroundColor = 'orange';
+            
+            //check for enemy or player or wall
+            var playerCheck = box.querySelector('#player');
+            var botCheck = box.querySelector('.bot');
+
+            if(playerCheck != null) {
+                hp = hp - weapons.grenade.damage;
+            } else if (botCheck != null) {
+                //damage to bot
+                var botId = botCheck.id;
+                bots[botId] = bots[botId] - weapons.grenade.damage;
+            }
+            
+        }
+
+        setTimeout(function(){
+            for(var i=0; i<idInRadius1.length; i++) {
+                var box = document.getElementById(idInRadius1[i]);
+                box.style.backgroundColor = 'white';
+            }
+        },300)
+    } else if (radius == 2) {
+        //explode in second ring around grenadeBox
+        for(var i=0; i<idInRadius2.length; i++) {
+            var box = document.getElementById(idInRadius2[i]);
+            box.style.backgroundColor = 'yellow';
+
+            
+            //check for enemy or player or wall
+            var playerCheck = box.querySelector('#player');
+            var botCheck = box.querySelector('.bot');
+
+            if(playerCheck != null) {
+                hp = hp - weapons.grenade.damage;
+            } else if (botCheck != null) {
+                //damage to bot
+                var botId = botCheck.id;
+                bots[botId] = bots[botId] - weapons.grenade.damage;
+            }
+            
+        }
+
+        setTimeout(function(){
+            for(var i=0; i<idInRadius2.length; i++) {
+                var box = document.getElementById(idInRadius2[i]);
+                box.style.backgroundColor = 'white';
+            }
+
+            grenadeBox.removeChild(grenade);
+            grenadeBox.classList.remove('grenadeBox');
+        },300)
+    }
+    
+
+
+    
+}
+
+
+function initGrenadeExplosion (grenade) {
+    var grenadeBox = grenade.parentNode;
+    var grenadeId = parseInt(grenadeBox.id);
+    var idInRadius1 = checkRadius(grenadeId, 1);
+    var idInRadius2 = checkRadius(grenadeId, 2);
+
+    for(var i=0; i<idInRadius2.length; i++) {
+        for(var a=0; a<idInRadius1.length; a++) {
+            if(idInRadius2[i] == idInRadius1[a]) {
+                idInRadius2.splice(i, 1);
+            }
+        }
+    }
+    console.log('grenadeId: ' + grenadeId);
+    console.log('idInRadius1: ' + idInRadius1);
+    console.log('idInRadius2: ' + idInRadius2);
+    //now, idInRadius1 has only elements that are 1 distance away from the grenade
+    //now, idInRadius2 has only elements that are 2 distance away from the grenade
+    
+    setTimeout (function () {
+        grenadeExplode(grenade, grenadeBox, idInRadius1, idInRadius2, 0);
+    }, 200)
+
+    setTimeout (function () {
+        grenadeExplode(grenade, grenadeBox, idInRadius1, idInRadius2, 1);
+    }, 400)
+
+    setTimeout (function () {
+        grenadeExplode(grenade, grenadeBox, idInRadius1, idInRadius2, 2);
+    }, 600)
+}
+
 
 
 
 
 function fireGrenade () {
     //fire grenade
+    var grenade = document.createElement('div');
+    grenade.classList.add('grenade');
+    var playerBox = player.parentNode;
+    var playerId = parseInt(playerBox.id);
 
+    if (direction == 'left') {
+        if((playerId - 1)%num != 0 && (playerId - 2)%num != 0 && (playerId - 3)%num != 0) {
+            var grenadeBox = document.getElementById((playerId - 1).toString())
+            grenadeBox.appendChild(grenade);
+            grenadeBox.classList.add('grenadeBox');
+
+            setTimeout(function () {
+                //move to second box
+                var grenadeId = parseInt(grenadeBox.id);
+
+                grenadeBox.removeChild(grenade);
+                grenadeBox.classList.remove('grenadeBox');
+
+                var newBox = document.getElementById((grenadeId - 1).toString());
+                newBox.appendChild(grenade);
+                newBox.classList.add('grenadeBox');
+
+                setTimeout(function () {
+                    //move to third box
+                    var grenadeId = parseInt(newBox.id);
+    
+                    newBox.removeChild(grenade);
+                    newBox.classList.remove('grenadeBox');
+    
+                    var newerBox = document.getElementById((grenadeId - 1).toString());
+                    newerBox.appendChild(grenade);
+                    newerBox.classList.add('grenadeBox');
+
+                    setTimeout(function () {
+                        //explode
+                        initGrenadeExplosion(grenade);
+                    }, 300);
+                }, 100);
+            }, 100);
+        }
+    } else if (direction == 'right') {
+        if(playerId%num != 0 && (playerId+1)%num != 0 && (playerId+2)%num != 0) {
+            var grenadeBox = document.getElementById((playerId + 1).toString())
+            grenadeBox.appendChild(grenade);
+            grenadeBox.classList.add('grenadeBox');
+            
+            setTimeout(function () {
+                //move to second box
+                var grenadeId = parseInt(grenadeBox.id);
+                grenadeBox.removeChild(grenade);
+                grenadeBox.classList.remove('grenadeBox');
+
+                var newBox = document.getElementById((grenadeId + 1).toString());
+                newBox.appendChild(grenade);
+                newBox.classList.add('grenadeBox');
+
+                setTimeout(function () {
+                    //move to third box
+                    var grenadeId = parseInt(newBox.id);
+    
+                    newBox.removeChild(grenade);
+                    newBox.classList.remove('grenadeBox');
+    
+                    var newerBox = document.getElementById((grenadeId + 1).toString());
+                    newerBox.appendChild(grenade);
+                    newerBox.classList.add('grenadeBox');
+
+                    setTimeout(function () {
+                        //explode
+                        initGrenadeExplosion(grenade);
+                    }, 300);
+                }, 100);
+            }, 100);
+        }
+    } else if (direction == 'up') {
+        if(playerId > num*3) {
+            var grenadeBox = document.getElementById((playerId - num).toString())
+            grenadeBox.appendChild(grenade);
+            grenadeBox.classList.add('grenadeBox');
+            
+            setTimeout(function () {
+                //move to second box
+                var grenadeId = parseInt(grenadeBox.id);
+                grenadeBox.removeChild(grenade);
+                grenadeBox.classList.remove('grenadeBox');
+
+                var newBox = document.getElementById((grenadeId - num).toString());
+                newBox.appendChild(grenade);
+                newBox.classList.add('grenadeBox');
+
+                setTimeout(function () {
+                    //move to third box
+                    var grenadeId = parseInt(newBox.id);
+    
+                    newBox.removeChild(grenade);
+                    newBox.classList.remove('grenadeBox');
+    
+                    var newerBox = document.getElementById((grenadeId - num).toString());
+                    newerBox.appendChild(grenade);
+                    newerBox.classList.add('grenadeBox');
+
+                    setTimeout(function () {
+                        //explode
+                        initGrenadeExplosion(grenade);
+                    }, 300);
+                }, 100);
+            }, 100);
+        }
+    } else if (direction == 'down') {
+        if(playerId <= (num*num)-num*3) {
+            var grenadeBox = document.getElementById((playerId + num).toString())
+            grenadeBox.appendChild(grenade);
+            grenadeBox.classList.add('grenadeBox');
+            
+            setTimeout(function () {
+                //move to second box
+                var grenadeId = parseInt(grenadeBox.id);
+                grenadeBox.removeChild(grenade);
+                grenadeBox.classList.remove('grenadeBox');
+
+                var newBox = document.getElementById((grenadeId + num).toString());
+                newBox.appendChild(grenade);
+                newBox.classList.add('grenadeBox');
+
+                setTimeout(function () {
+                    //move to third box
+                    var grenadeId = parseInt(newBox.id);
+    
+                    newBox.removeChild(grenade);
+                    newBox.classList.remove('grenadeBox');
+    
+                    var newerBox = document.getElementById((grenadeId + num).toString());
+                    newerBox.appendChild(grenade);
+                    newerBox.classList.add('grenadeBox');
+
+                    setTimeout(function () {
+                        //explode
+                        initGrenadeExplosion(grenade);
+                    }, 300);
+                }, 100);
+            }, 100);
+        }
+    }
+
+    noWeapons[2]--;
+    //change the DOM
+    var numberG = document.getElementById('numberG');
+    numberG.innerText = 'available: ' + noWeapons[2];
+
+    if(noWeapons[2] == 0) {
+        changeWeapons(49);
+    }
 }
 
 

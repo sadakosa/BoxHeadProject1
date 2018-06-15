@@ -141,6 +141,7 @@ function buildRight() {
         var imgS = document.createElement('div');
         var nameS = document.createElement('div');
         var numberS = document.createElement('div');
+            numberS.id = 'numberS';
         var damageS = document.createElement('div');
 
         imgS.classList.add('weaponImgShotgun');
@@ -149,7 +150,7 @@ function buildRight() {
         damageS.classList.add('weaponDamage');
 
         nameS.innerText = 'Shotgun';
-        numberS.innerText = 'available: ' + noWeapons[1]
+        numberS.innerText = 'available: ' + noWeapons[1];
         damageS.innerText = 'damage: ' + weapons.shotgun.damage;
 
         shotgunStats.appendChild(imgS);
@@ -161,6 +162,7 @@ function buildRight() {
         var imgG = document.createElement('div');
         var nameG = document.createElement('div');
         var numberG = document.createElement('div');
+            numberG.id = 'numberG';
         var damageG = document.createElement('div');
 
         imgG.classList.add('weaponImgGrenade');

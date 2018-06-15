@@ -160,6 +160,10 @@ h1 {
     background-size: contain;
 }
 
+.grenadeBox {
+    background-image: url('img/zombies.png');
+    background-size: contain;
+}
 
 .weapons {
     position: relative;
