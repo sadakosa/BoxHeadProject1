@@ -3,6 +3,7 @@ var botCheckInt;
 var previousPlay;
 var counter = 0;
 var target;
+var botsWanted = 1;
 // var idInRadius = [];
 
 function botsLeftNumber () {
@@ -187,16 +188,50 @@ function moveRandom (playPosition, botPosition, getBots, i) {
     } else {
         var dir;
 
-        if (botPosition <= num) {
-            //bot is in top row
+        if (botPosition == 0) { //bot is in top left corner
+            dir = Math.floor(Math.random()*8)+1;
+            if (dir == 1) {
+                dir =  2;
+            } else if (dir == 3) {
+                dir = 4;
+            } else if (dir == 5 || dir == 6 || dir == 7) {
+                dir = 8;
+            } 
+        } else if (botPosition == num) { //bot is in top right corner
+            dir = Math.floor(Math.random()*8)+1;
+            if (dir == 1) {
+                dir =  2;
+            } else if (dir == 3) {
+                dir = 4;
+            } else if (dir == 5 || dir == 8 || dir == 7) {
+                dir = 6;
+            } 
+        } else if (botPosition <= num) { //bot is in top row
             dir = Math.floor(Math.random()*8)+2;
             if(dir == 5) {
                 dir = 6;
             } else if (dir == 7) {
                 dir = 8;
             }
-        } else if (botPosition > (num*num)-num) {
-            //bot is in bottom row
+        } else if (botPosition == num*num) { //bot is in bottom right corner
+            dir = Math.floor(Math.random()*8)+1;
+            if (dir == 2) {
+                dir =  1;
+            } else if (dir == 4) {
+                dir = 3;
+            } else if (dir == 6 || dir == 8 || dir == 7) {
+                dir = 5;
+            } 
+        } else if (botPosition == num*num-num+1) { //bot is in bottom left corner
+            dir = Math.floor(Math.random()*8)+1;
+            if (dir == 2) {
+                dir =  1;
+            } else if (dir == 3) {
+                dir = 4;
+            } else if (dir == 6 || dir == 8 || dir == 7) {
+                dir = 5;
+            } 
+        } else if (botPosition > (num*num)-num) { //bot is in bottom row
             dir = Math.floor(Math.random()*8)+1;
             if(dir == 2) {
                 dir = 1;
@@ -205,8 +240,7 @@ function moveRandom (playPosition, botPosition, getBots, i) {
             } else if (dir == 8) {
                 dir = 7;
             }
-        } else if (botPosition%num == 0) {
-            //bot is in right row
+        } else if (botPosition%num == 0) { //bot is in right row
             dir = Math.floor(Math.random()*8)+1;
             if(dir == 4) {
                 dir = 3;
@@ -215,14 +249,16 @@ function moveRandom (playPosition, botPosition, getBots, i) {
             } else if (dir == 6)  {
                 dir = 8;
             }
-        } else if ((botPosition-1)%num == 0) {
-            //bot is in left row
-            dir = Math.floor(Math.random()*6)+1;
+        } else if ((botPosition-1)%num == 0) { //bot is in left row
+            dir = Math.floor(Math.random()*8)+1;
             if(dir == 3) {
                 dir = 4;
+            } else if (dir == 7) {
+                dir = 5;
+            } else if (dir == 6) {
+                dir = 8;
             }
-        } else {
-            //bot is not touch the edges of the bigBox
+        } else { //bot is not touching the edges of the bigBox
             dir = Math.floor(Math.random()*8)+1;
         }
 
@@ -268,7 +304,7 @@ function moveFollowEasy (playPosition, target, botPosition, getBots, i) {
     if(checkBeside(playPosition, botPosition) || checkDiagonal(playPosition, botPosition)) {
         if(hp>0) {
             //bot is directly beside the player, damages the player at each interval
-            hp -= 40;
+            hp -= 100;
             //display hit
             //create text for pause
             var text = document.getElementsByClassName('text')[0].childNodes[0];
@@ -470,8 +506,8 @@ function checkRadius (playPosition, rad) {
                 idInRadius.push((tr+(num*a)).toString());
             }
 
-            idInRadius.push(tl.toString());
-            idInRadius.push(bl.toString());
+            idInRadius.push(tr.toString());
+            idInRadius.push(br.toString());
         }
     } else {
         //for when the player is not touching the walls
@@ -557,7 +593,7 @@ function botCheck () {
                 botBox.classList.remove('botBox');
 
                 //change DOM
-                botsLeft.childNodes[1].innerText = 'Bots left: ' + botsLeftNumber() + " / 20";
+                botsLeft.childNodes[1].innerText = 'Bots left: ' + botsLeftNumber() + " / " + botsWanted;
             }
 
             if (checkBotInRadius(playPosition, currentBotElement)) {
@@ -610,7 +646,7 @@ function levelOne () {
 
         i += 1;
 
-        if (i >= 1) {
+        if (i >= botsWanted) {
             clearInterval(x);
         };
     },500);

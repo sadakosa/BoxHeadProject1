@@ -118,7 +118,7 @@ function buildRight() {
  
      //Bots Left
      var botsLeftText = document.createElement('h3');
-     botsLeftText.innerText = 'Bots left: 18 / 18';
+     botsLeftText.innerText = 'Bots left: ' + botsWanted + ' / ' + botsWanted;
      botsLeft.appendChild(botsLeftText);
 
     //build Weapons
