@@ -31,6 +31,7 @@ function bulletCheckMove (dir, bullet, int)  {
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
             clearInterval(int);
+            return;
         } else if (botCheck != null) {
             //damage to bot
             var botId = botCheck.id;
@@ -40,8 +41,13 @@ function bulletCheckMove (dir, bullet, int)  {
             bulletBox.removeChild(bullet);
             bulletBox.classList.remove('bulletBox');
             clearInterval(int);
+            return;
+        }else{
+            debugger;
         }
-    } else if (dir == 'left') {
+    }
+    
+    if (dir == 'left') {
         if((bulletId - 1)%num != 0) {
             //remove from old box 
             bulletBox.removeChild(bullet);

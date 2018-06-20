@@ -9,11 +9,16 @@ body {
     margin: 0 auto;
     height: 95vh;
     border: 1px solid black;
+    /* border-bottom: 0px; */
     /* display: inline-block; */
 }
 
 .gameName {
     border: 1px solid black;
+    /* border-bottom: 1px solid black; */
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
     height: 7%;
 }
 
@@ -21,8 +26,9 @@ body {
     position: relative;
     width: 70%;
     margin: 0 auto;
-    height: 92.5%;
-    border: 1px solid black;
+    height: 92.75%;
+    border-left: 1px solid black;
+    /* border-top: 1px solid black; */
     display: inline-block;
     left: 10px;
 }
@@ -94,8 +100,8 @@ h1 {
 }
 
 .smallBox {
-    /* border: 1px solid black; */
-    border: 1px solid white;
+    border: 1px solid black;
+    /* border: 1px solid white; */
     position: relative;
     display: inline;
 }
@@ -150,7 +156,8 @@ h1 {
 .botBox {
     /* background-color: grey; */
     /* background-image: url('img/zombies.png'); */
-    background-image: url('img/cuteSkullBlack.png');
+    /* background-image: url('img/cuteSkullBlack.png'); */
+    background-image: url('img/devil.png');
     background-size: contain;
 }
 
@@ -215,6 +222,7 @@ h1 {
 .controls {
     color: purple;
     padding: 1px 30px 0px  20px;
+    font-size: 20px;
 }
 
 .weaponImgPistol {

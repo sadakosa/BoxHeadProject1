@@ -3,14 +3,17 @@ var botCheckInt;
 var previousPlay;
 var counter = 0;
 var target;
-var botsWanted = 2;
+var botsWanted = 20;
 // var idInRadius = [];
 
 function botsLeftNumber () {
     var botsNum = 0;
     var values = Object.values(bots);
+    console.log('values: ' + values);
     for(var i=0; i<values; i++) {
         if(values[i] > 0) {
+            console.log('values' + i +': ' + values[i]);
+            console.log(botsNum);
             botsNum++;
         }
     }
@@ -189,12 +192,13 @@ function moveRandom (playPosition, botPosition, getBots, i) {
         var dir;
 
         if (botPosition == 0) { //bot is in top left corner
-            dir = Math.floor(Math.random()*8)+1;
+            dir = Math.floor(Math.random()*3)+1;
+
             if (dir == 1) {
-                dir =  2;
-            } else if (dir == 3) {
-                dir = 4;
-            } else if (dir == 5 || dir == 6 || dir == 7) {
+                dir =  4;
+            } else if (dir == 2) {
+                dir = 2;
+            } else {
                 dir = 8;
             } 
         } else if (botPosition == num) { //bot is in top right corner
